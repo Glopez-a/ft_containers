@@ -5,22 +5,30 @@ template <typename T>
 class list
 {
 private:
-	node	*_first;
-	int		_size;
-	node	*_last;
+	node<T>		*_first;
+	unsigned	_size;
+	node<T>		*_last;
 public:
-	list<T>::list():
-		_first(NULL), _size(0) _last(NULL) {}
+	list(): _first(NULL), _size(0), _last(NULL) {}
 	
-	list<T>::list(int n, T const & cont):
+	list(unsigned n, T const & cont):
 		_size(n)
 	{
 		//pendiente
 	}
 
-	list<T>::~list()
+	~list()
 	{
 	}
 
+	void	assign(unsigned n, T const & cont)
+	{
+		// n nuevos elementos con contenido T
+	}
+
+	T const	&back() 
+	{
+		return (_last->previous().getContent()); // el ultimo es el nulo y tengo que devolver el anterior
+	}
 };
 
