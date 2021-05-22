@@ -54,7 +54,8 @@ public:
 
 	void	clear()
 	{
-		//remove all elements and call reset()
+		while (_last->getPrevious() != _first)
+			pop_back();
 	}
 
 	bool empty() const
@@ -74,14 +75,26 @@ public:
 		return (_first->getNext()->getContent());
 	}
 
-	void push_back(T const & val)
+	void	pop_back()
+	{
+		_last->getPrevious()->remove();
+		_size--;
+	}
+
+	void	pop_front()
+	{
+		_first->getNext()->remove();
+		_size--;
+	}
+
+	void	push_back(T const & val)
 	{
 		Node<T> *last = new Node<T>(val);
 		_last->getPrevious()->pushAfter(last);
 		_size++;
 	}
 
-	void push_front(T const & val)
+	void	push_front(T const & val)
 	{
 		Node<T> *last = new Node<T>(val);
 		_first->pushAfter(last);

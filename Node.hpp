@@ -64,6 +64,11 @@ public:
 	}
 
 	void	remove()
+	{
+		_next->_previous = _previous;
+		_previous->_next = _next;
+		delete (this);
+	}
 };
 
 template <typename T>
