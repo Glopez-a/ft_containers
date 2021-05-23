@@ -2,9 +2,38 @@
 #define LIST_HPP
 
 #include "Node.hpp"
+#include <iostream>
 
 namespace ft
 {
+template <typename T>
+class ListIterator
+{
+	protected:
+		Node<T>	*_n;
+	public:
+		ListIterator(): _n(nullptr) {}
+		ListIterator(Node<T> *nod): _n(nod) {}
+		~ListIterator() {}
+		ListIterator operator++(int) 
+		{
+			ListIterator tmp(*this);
+			_n = _n->getNext();
+			return (tmp);
+		}
+
+		bool	operator!=(ListIterator<T> const &src) const
+		{
+			return (_n != src._n);
+		}
+
+		T 		&operator*()
+		{
+			return (_n->getContent());
+		}
+};
+
+
 template <typename T>
 class List
 {
@@ -22,10 +51,7 @@ private:
 	}
 
 public:
-	List()
-	{
-		reset();
-	}
+	List() {reset();}
 	
 	List(unsigned n, T const & cont):
 		_size(n)
@@ -33,9 +59,7 @@ public:
 		//pendiente
 	}
 
-	~List()
-	{
-	}
+	~List() {}
 
 	void	assign(unsigned n, T const & cont)
 	{
@@ -52,10 +76,34 @@ public:
 		return (_last->getPrevious()->getContent());
 	}
 
+	ListIterator<T>	begin()
+	{
+		ListIterator<T>	it(_first);
+		return (it);
+	}
+
+	const ListIterator<T>	begin() const
+	{
+		ListIterator<T>	it(_first);
+		return (it);
+	}
+
 	void	clear()
 	{
 		while (_last->getPrevious() != _first)
 			pop_back();
+	}
+
+	ListIterator<T>	end()
+	{
+		ListIterator<T>	it(_last);
+		return (it);
+	}
+
+	const ListIterator<T>	end() const
+	{
+		ListIterator<T>	it(_last);
+		return (it);
 	}
 
 	bool empty() const

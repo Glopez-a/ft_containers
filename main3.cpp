@@ -1,7 +1,7 @@
 #include <list>
 #include <iostream>
 #include <limits>
-
+#include <unistd.h>
 int main()
 {
 	std::cout << "\n STRING LIST\n";
@@ -17,6 +17,6 @@ int main()
 	std::cout << string_lst.max_size() << std::endl;
 	std::list<int>	lint;
 	std::cout << lint.max_size() << std::endl;
-	std::cout << (std::numeric_limits<std::size_t>::max() / sizeof(int)) << std::endl;
+	std::cout << (sysconf( _SC_PHYS_PAGES )*sysconf( _SC_PAGE_SIZE )/sizeof(int)) << std::endl;
 
 }

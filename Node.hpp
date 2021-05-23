@@ -29,10 +29,20 @@ public:
 		_next = src._next;
 		return (*this);
 	}
+	
+	Node	const	*getPrevious() const
+	{
+		return (_previous);
+	}
 
 	Node	*&getPrevious()
 	{
 		return (_previous);
+	}
+
+	Node	const	*getNext() const
+	{
+		return (_next);
 	}
 
 	Node	*&getNext()
