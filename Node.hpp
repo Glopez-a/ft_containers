@@ -73,6 +73,19 @@ public:
 		_next = src;
 	}
 
+	void	pushBefore(Node<T> *src)
+	{
+		if (_previous)
+		{
+			src->_previous = _previous;
+			_previous->_next = src;
+		}
+		else
+			src->_previous = nullptr;
+		src->_next = this;
+		_previous = src;
+	}
+
 	void	remove()
 	{
 		_next->_previous = _previous;

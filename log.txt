@@ -1,0 +1,51 @@
+********** LIST **********
+
+ INT LIST
+list empty? 1
+last element: 0
+last element: 3
+last element: 6
+last element: 6
+first element: 5
+first element: 3
+size: 2
+last element: 3
+list empty? 0
+list empty? 1
+last element: 0
+first element: 0
+last element: 7
+size: 1
+my list is: 7 4 42 0 13
+assign 5 elements with 42 value
+my list is: 42 42 42 42 42
+my new list is: 5 324 35 34 5 2
+assign from the 2º element to the 5 element of new list
+my list is: 324 35 34
+assign: 4 elemnts with value 24
+my list is: 24 24 24 24
+erase position 5 from new list
+my new list is: 5 324 35 34 2
+2
+erase position 1 from new list
+my new list is: 324 35 34 2
+324
+erase from position 2 to 4, from new list
+35
+2
+my new list is: 324 2
+2
+insert in the first position of new list, value 6
+my new list is: 6 324 2
+6
+insert in the second position of new list 3 elemnts with value 42
+my new list is: 6 42 42 42 324 2
+324
+insert in the position 5 of new list, from the pos 2 till the pos 3 of my list
+my new list is: 6 42 42 42 31 24 324 2
+
+ STRING LIST
+last element: 
+last element: adios
+last element: 
+size: 0
