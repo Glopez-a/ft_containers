@@ -136,11 +136,26 @@ int main()
 	it1_int++;
 	it1_int++;
 	it2_int++;
+	lst_int.push_back(5);
+	std::cout << *it1_int << std::endl;
+	std::cout << *it2_int << std::endl;
+		std::cout << "my int list is:";
+	for (ft::ListIterator<int>	it_int = lst_int.begin(); it_int != lst_int.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+
 	new_lst.insert(it6_int, it2_int, it1_int);
 	std::cout << "my new list is:";
 	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
 	 	std::cout << " " << *it_int;
 	std::cout << std::endl;
+
+	lst_int.sort(it2_int, it1_int);
+	std::cout << "my int list is:";
+	for (ft::ListIterator<int>	it_int = lst_int.begin(); it_int != lst_int.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	
 
 
 

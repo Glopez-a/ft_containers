@@ -86,6 +86,19 @@ public:
 		_previous = src;
 	}
 
+	void	swap(Node<T> *src)
+	{
+		Node<T> *temp = new Node<T>();
+		temp->_next = src->_next;
+		temp->_previous = src->_previous;
+		temp->_content = src->_content;
+		src->_next->_previous = temp;
+		src->_previous->_next = temp;
+		src->pushAfter(this);
+		this->pushAfter(temp);
+		temp->remove();
+	}
+
 	void	remove()
 	{
 		_next->_previous = _previous;

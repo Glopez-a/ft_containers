@@ -1,22 +1,42 @@
-#include <list>
 #include <iostream>
-#include <limits>
-#include <unistd.h>
-int main()
+#include <list>
+
+// compare only integral part:
+bool mycomparison (double first, double second)
+{ return ( int(first)<int(second) ); }
+
+int main ()
 {
-	std::cout << "\n STRING LIST\n";
-	std::list<std::string>	string_lst;
+  std::list<double> first, second;
 
-	std::cout << string_lst.max_size() << std::endl;
+  first.push_back (2.2);
+  first.push_back (2.9);
+  first.push_back (3.1);
 
-	std::cout << "hola\n";
-	std::cout << "last element: " << string_lst.back() << std::endl;
-	string_lst.push_back("hola");
-	std::cout << "last element: " << string_lst.back() << std::endl;
-	std::cout << "size: " << string_lst.size() << std::endl;
-	std::cout << string_lst.max_size() << std::endl;
-	std::list<int>	lint;
-	std::cout << lint.max_size() << std::endl;
-	std::cout << (sysconf( _SC_PHYS_PAGES )*sysconf( _SC_PAGE_SIZE )/sizeof(int)) << std::endl;
+  second.push_back (2.2);
+  second.push_back (2.9);
+  second.push_back (3.1);
 
+  //first.sort();
+  //second.sort();
+
+  first.merge(second);
+
+  // (second is now empty)
+
+  //second.push_back (2.1);
+
+  first.merge(second,mycomparison);
+
+  std::cout << "second contains:";
+  for (std::list<double>::iterator it=second.begin(); it!=second.end(); ++it)
+    std::cout << ' ' << *it;
+  std::cout << '\n';
+
+  std::cout << "first contains:";
+  for (std::list<double>::iterator it=first.begin(); it!=first.end(); ++it)
+    std::cout << ' ' << *it;
+  std::cout << '\n';
+
+  return 0;
 }

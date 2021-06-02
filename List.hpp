@@ -18,7 +18,8 @@ namespace ft
 	// {
 	// 	return (a > b ? b : a);
 	// }
-
+bool mycomparison (double first, double second)
+{ return ( int(first)<int(second) ); }
 
 template <typename T>
 class ListIterator
@@ -242,7 +243,12 @@ public:
 
 	void	merge(List &x, bool comp)
 	{
-		//
+		if (&x == this)
+		if (!_size)
+		{
+			assign(x.begin(), x.end());
+			x.clear();
+		}
 	}
 
 	List	&operator=(const List &x)
@@ -276,8 +282,18 @@ public:
 		_size++;
 	}
 
+	void	sort(ListIterator<T> it1, ListIterator<T> it2)
+	{
+		it2.getNode()->swap(it1.getNode());
+		// for (ListIterator<T>	it = begin(); it != end(); it++)
+		// {
+			
+		// }
+	}
 
 	unsigned size() const {return _size;}
+
+
 };
 }
 
