@@ -88,21 +88,20 @@ public:
 
 	void	swap(Node<T> *src)
 	{
-		Node<T> *temp = new Node<T>();
-		temp->_next = src->_next;
-		temp->_previous = src->_previous;
-		temp->_content = src->_content;
-		src->_next->_previous = temp;
-		src->_previous->_next = temp;
-		src->pushAfter(this);
-		this->pushAfter(temp);
-		temp->remove();
+		Node<T> *cpy1 = new Node<T>();
+		Node<T> *cpy2 = new Node<T>();
+		cpy1->_content = src->_content;
+		cpy2->_content = _content;
+		src->pushAfter(cpy2);
+		this->pushAfter(cpy1);
+		src->remove();
+		this->remove();
 	}
 
 	void	remove()
 	{
-		_next->_previous = _previous;
 		_previous->_next = _next;
+		_next->_previous = _previous;
 		delete (this);
 	}
 };

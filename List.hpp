@@ -238,7 +238,7 @@ public:
 
 	void	merge(List &x)
 	{
-
+		//
 	}
 
 	void	merge(List &x, bool comp)
@@ -253,7 +253,10 @@ public:
 
 	List	&operator=(const List &x)
 	{
-		//
+		clear();
+		for (ft::ListIterator<int>	it_int = x._first; it_int != x._last; it_int++)
+			push_back(it_int.getNode()->getContent());
+		return (*this);
 	}
 
 	void	pop_back()
