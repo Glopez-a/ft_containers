@@ -1,6 +1,13 @@
 #include "Node.hpp"
 #include "List.hpp"
 
+// a predicate implemented as a function:
+bool single_digit (const int& value) { return (value<10); }
+
+// a predicate implemented as a class:
+struct is_odd {
+  bool operator() (const int& value) { return (value%2)==1; }
+};
 
 int main()
 {
@@ -171,18 +178,41 @@ int main()
 	for (ft::ListIterator<int>	it_int = lst_int2.begin(); it_int != lst_int2.end(); it_int++)
 	 	std::cout << " " << *it_int;
 	std::cout << std::endl;
-
-
-
-	std::cout << "\n STRING LIST\n";
-	ft::List<std::string>	string_lst;
-	std::cout << "last element: " << string_lst.back() << std::endl;
-	string_lst.push_back("adios");
-	std::cout << "last element: " << string_lst.back() << std::endl;
-	string_lst.pop_back();
-	std::cout << "last element: " << string_lst.back() << std::endl;
-	std::cout << "size: " << string_lst.size() << std::endl;
-
+	lst_int2.push_back(31);
+	std::cout << "my 2 list is:";
+	for (ft::ListIterator<int>	it_int = lst_int2.begin(); it_int != lst_int2.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	lst_int2.remove(31);
+	std::cout << "my 2 list is:";
+	for (ft::ListIterator<int>	it_int = lst_int2.begin(); it_int != lst_int2.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	lst_int2.remove_if(single_digit);
+	std::cout << "my 2 list is:";
+	for (ft::ListIterator<int>	it_int = lst_int2.begin(); it_int != lst_int2.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	std::cout << "my new list is:";
+	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	new_lst.remove_if(is_odd());
+	std::cout << "my new list is:";
+	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	new_lst.resize(10);
+	std::cout << "my new list is:";
+	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	new_lst.resize(3);
+	std::cout << "my new list is:";
+	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	std::cout << "size: " << new_lst.size() << std::endl;
 
 	// ft::Node<int>			first_nod ;
 	// std::cout << first_nod.getContent() << std::endl;

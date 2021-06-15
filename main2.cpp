@@ -6,6 +6,8 @@ int	main(void)
 	std::cout << "********** LIST **********\n";
 	std::cout << "\n INT LIST\n";
 
+
+
 	std::list<int>	lst_int;
 
 	std::cout << "list empty? " << lst_int.empty() << std::endl;
@@ -130,17 +132,44 @@ int	main(void)
 	lst_int.push_back(2);
 	std::cout << "insert in the position 5 of new list, from the pos 2 till the pos 3 of my list\n";
 	std::list<int>::iterator	it1_int = lst_int.begin();
-	std::list<int>::iterator	it2_int = it1_int;
+	std::list<int>::iterator	it2_int = lst_int.begin();
+	lst_int.push_back(5);
 	it1_int++;
 	it1_int++;
 	it1_int++;
-	it2_int++;
+
+	std::cout << *it1_int << std::endl;
+	std::cout << *it2_int << std::endl;
+		std::cout << "my int list is:";
+	for (std::list<int>::iterator	it_int = lst_int.begin(); it_int != lst_int.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+
 	new_lst.insert(it6_int, it2_int, it1_int);
 	std::cout << "my new list is:";
 	for (std::list<int>::iterator	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
 	 	std::cout << " " << *it_int;
 	std::cout << std::endl;
 
+	// lst_int.sort(it2_int, it1_int);
+	// std::cout << "my int list is:";
+	// for (std::list<int>::iterator	it_int = lst_int.begin(); it_int != lst_int.end(); it_int++)
+	//  	std::cout << " " << *it_int;
+	// std::cout << std::endl;
+	
+	std::list<int>	lst_int2;
+	lst_int2.push_back(5);
+	lst_int2.push_front(15);
+	std::cout << "my 2 list is:";
+	for (std::list<int>::iterator	it_int = lst_int2.begin(); it_int != lst_int2.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+
+	lst_int2 = lst_int;
+	std::cout << "my 2 list is:";
+	for (std::list<int>::iterator	it_int = lst_int2.begin(); it_int != lst_int2.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
 
 
 	// std::Node<int>			first_nod ;

@@ -42,4 +42,9 @@ insert in the second position of new list 3 elemnts with value 42
 my new list is: 6 42 42 42 324 2
 324
 insert in the position 5 of new list, from the pos 2 till the pos 3 of my list
-my new list is: 6 42 42 42 31 24 324 2
+2
+42
+my int list is: 42 31 24 2 5
+my new list is: 6 42 42 42 42 31 24 324 2
+my 2 list is: 15 5
+my 2 list is: 42 31 24 2 5

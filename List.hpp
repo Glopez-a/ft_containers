@@ -91,7 +91,7 @@ class List
 {
 private:
 	ft::Node<T>		*_first;
-	unsigned	_size;
+	unsigned int	_size;
 	ft::Node<T>		*_last;
 	void	reset()
 	{
@@ -182,6 +182,7 @@ public:
 		position--;
 		position.getNode()->getNext()->remove();
 		position++;
+		_size--;
 		return (position);
 	}
 
@@ -254,7 +255,9 @@ public:
 	List	&operator=(const List &x)
 	{
 		clear();
-		for (ft::ListIterator<int>	it_int = x._first; it_int != x._last; it_int++)
+		ft::ListIterator<int>	it_int = x._first;
+		it_int++;
+		for (;it_int != x._last; it_int++)
 			push_back(it_int.getNode()->getContent());
 		return (*this);
 	}
@@ -283,6 +286,64 @@ public:
 		Node<T> *last = new Node<T>(val);
 		_first->pushAfter(last);
 		_size++;
+	}
+
+	/*
+	reverse_iterator	rbegin()
+
+	const reverse_iterator	rbegin() const
+	*/
+
+	void	remove(T const & val)
+	{
+		ft::ListIterator<int>	it_int = _first;
+		it_int++;
+		for (;it_int != _last; it_int++)
+			if (it_int.getNode()->getContent() == val)
+			{
+				it_int.getNode()->remove();
+				_size--;
+			}
+	}
+
+	template <class Predicate>
+	void	remove_if(Predicate pred)
+	{
+		ft::ListIterator<int>	it_int = _first;
+		it_int++;
+		for (;it_int != _last; it_int++)
+			if (pred(it_int.getNode()->getContent()))
+			{
+				it_int.getNode()->remove();
+				_size--;
+			}
+	}
+
+	/*
+	reverse_iterator rend()
+	const_reverse_iterator rend() const
+	*/
+
+	void	resize(unsigned n, T val = T())
+	{
+		if (_size < n)
+		{
+			ft::ListIterator<int>	it_int = _last;
+			this->insert(it_int, n - _size, val);
+		}
+		else if (_size > n)
+		{
+			ft::ListIterator<int>	it_int = _first;
+			for (int i = 0; i < n; i++)
+				it_int++;
+			it_int++;
+			this->erase(it_int, _last);
+		}
+	}
+
+	void	reverse()
+	{
+		//siguiente
 	}
 
 	void	sort(ListIterator<T> it1, ListIterator<T> it2)
