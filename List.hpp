@@ -85,6 +85,69 @@ class ListIterator
 		}
 };
 
+template <typename T>
+class ListReverseIterator
+{
+	protected:
+		Node<T>	*_n;
+	public:
+		ListReverseIterator(): _n(nullptr) {}
+		ListReverseIterator(Node<T> *nod): _n(nod) {}
+		virtual ~ListReverseIterator() {}
+		Node<T>	*&getNode()
+		{
+			return (_n);
+		}
+		bool	isLast()
+		{
+			if (_n->getPrevious() == nullptr)
+				return true;
+			return false;
+		}
+		ListReverseIterator operator++(int) 
+		{
+			ListReverseIterator tmp(*this);
+			_n = _n->getPrevious();
+			return (tmp);
+		}
+		ListReverseIterator operator--(int) 
+		{
+			ListReverseIterator tmp(*this);
+			_n = _n->getNext();
+			return (tmp);
+		}
+		ListReverseIterator &operator+=(int value)
+		{
+			if (value > 0)
+				for (int i = 0; i < value; i++)
+					_n = _n->getPrevious();
+			else 
+				for (int i = value; i > 0; i--)
+					_n = _n->getNext();
+			return (*this);
+		}
+		
+		ListReverseIterator &operator-=(int value)
+		{
+			operator+=(-value);
+			return (*this);
+		}
+
+		ListReverseIterator &operator+(int value)
+		{
+			return(*this += value);
+		}
+
+		bool	operator!=(ListReverseIterator<T> const &src) const
+		{
+			return (_n != src._n);
+		}
+
+		T 		&operator*()
+		{
+			return (_n->getContent());
+		}
+};
 
 template <typename T>
 class List
@@ -96,10 +159,10 @@ private:
 	void	reset()
 	{
 		_size = 0;
-		_first = new Node<T>();
 		_last = new Node<T>();
-		_last->getPrevious() = _first;
-		_first->getNext() = _last;
+		_first = _last;
+		_last->getPrevious() = nullptr;
+		_last->getPrevious() = nullptr;
 	}
 
 public:
@@ -328,22 +391,31 @@ public:
 	{
 		if (_size < n)
 		{
-			ft::ListIterator<int>	it_int = _last;
-			this->insert(it_int, n - _size, val);
+			ft::ListIterator<int>	it = _last;
+			this->insert(it, n - _size, val);
 		}
 		else if (_size > n)
 		{
-			ft::ListIterator<int>	it_int = _first;
+			ft::ListIterator<int>	it = _first;
 			for (int i = 0; i < n; i++)
-				it_int++;
-			it_int++;
-			this->erase(it_int, _last);
+				it++;
+			it++;
+			this->erase(it, _last);
 		}
 	}
 
 	void	reverse()
 	{
-		//siguiente
+		int i = 0;
+		ft::ListIterator<int>	it = _first;
+		ft::ListReverseIterator<int>	rit = _last;
+		rit++;
+		it++;
+		while (i < _size / 2 + 1)
+		{
+			it++.getNode()->swap(rit++.getNode());
+			i++;
+		}
 	}
 
 	void	sort(ListIterator<T> it1, ListIterator<T> it2)

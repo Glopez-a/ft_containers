@@ -202,19 +202,29 @@ int main()
 	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
 	 	std::cout << " " << *it_int;
 	std::cout << std::endl;
-	new_lst.resize(10);
+	new_lst.resize(10, 25);
 	std::cout << "my new list is:";
 	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
 	 	std::cout << " " << *it_int;
 	std::cout << std::endl;
-	new_lst.resize(3);
+	new_lst.resize(12);
+	std::cout << "my new list is:";
+	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	new_lst.resize(7);
+	std::cout << "my new list is:";
+	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	std::cout << "size: " << new_lst.size() << std::endl;
+	new_lst.reverse();
+	std::cout << "Reverse new list\n";
 	std::cout << "my new list is:";
 	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
 	 	std::cout << " " << *it_int;
 	std::cout << std::endl;
 	std::cout << "size: " << new_lst.size() << std::endl;
 
-	// ft::Node<int>			first_nod ;
-	// std::cout << first_nod.getContent() << std::endl;
 	system("leaks a.out");
 }
