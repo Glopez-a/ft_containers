@@ -79,6 +79,11 @@ class ListIterator
 			return (_n != src._n);
 		}
 
+		bool	operator==(ListIterator<T> const &src) const
+		{
+			return (_n == src._n);
+		}
+
 		T 		&operator*()
 		{
 			return (_n->getContent());
@@ -143,6 +148,11 @@ class ListReverseIterator
 			return (_n != src._n);
 		}
 
+		bool	operator==(ListReverseIterator<T> const &src) const
+		{
+			return (_n == src._n);
+		}
+
 		T 		&operator*()
 		{
 			return (_n->getContent());
@@ -161,8 +171,8 @@ private:
 		_size = 0;
 		_last = new Node<T>();
 		_first = _last;
-		_last->getPrevious() = nullptr;
-		_last->getPrevious() = nullptr;
+		_last->getPrevious() = _last;
+		_last->getNext() = _last;
 	}
 
 public:
@@ -174,7 +184,7 @@ public:
 		//pendiente
 	}
 
-	~List() {}
+	~List() {clear()}
 
 	void	assign(unsigned int n, T const & cont)
 	{
@@ -407,8 +417,8 @@ public:
 	void	reverse()
 	{
 		int i = 0;
-		ft::ListIterator<int>	it = _first;
-		ft::ListReverseIterator<int>	rit = _last;
+		ft::ListIterator<T>	it = _first;
+		ft::ListReverseIterator<T>	rit = _last;
 		rit++;
 		it++;
 		while (i < _size / 2 + 1)
@@ -418,17 +428,44 @@ public:
 		}
 	}
 
-	void	sort(ListIterator<T> it1, ListIterator<T> it2)
-	{
-		it2.getNode()->swap(it1.getNode());
-		// for (ListIterator<T>	it = begin(); it != end(); it++)
-		// {
-			
-		// }
-	}
-
 	unsigned size() const {return _size;}
 
+	void	sort()
+	{
+		ft::ListIterator<T> tmp;
+		for (int i = 0; i < _size; i++)
+		{
+			for (ft::ListIterator<T> it = begin(); it != end().getNode()->getPrevious(); it++)
+			{
+				tmp = it;
+				tmp++;
+				if (it.getNode()->getContent() > tmp.getNode()->getContent())
+				{
+					it.getNode()->swap(tmp.getNode());
+					it++;
+				}
+			}
+		}
+	}
+
+	template <class compare>
+	void	sort(compare comp)
+	{
+		ft::ListIterator<T> tmp;
+		for (int i = 0; i < _size; i++)
+		{
+			for (ft::ListIterator<T> it = begin(); it != end().getNode()->getPrevious(); it++)
+			{
+				tmp = it;
+				tmp++;
+				if (!comp(it.getNode()->getContent(), tmp.getNode()->getContent()))
+				{
+					it.getNode()->swap(tmp.getNode());
+					it++;
+				}
+			}
+		}
+	}
 
 };
 }
