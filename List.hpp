@@ -184,7 +184,7 @@ public:
 		//pendiente
 	}
 
-	~List() {clear()}
+	~List() {clear();}
 
 	void	assign(unsigned int n, T const & cont)
 	{
@@ -407,7 +407,7 @@ public:
 		else if (_size > n)
 		{
 			ft::ListIterator<int>	it = _first;
-			for (int i = 0; i < n; i++)
+			for (unsigned int i = 0; i < n; i++)
 				it++;
 			it++;
 			this->erase(it, _last);
@@ -416,7 +416,7 @@ public:
 
 	void	reverse()
 	{
-		int i = 0;
+		unsigned int i = 0;
 		ft::ListIterator<T>	it = _first;
 		ft::ListReverseIterator<T>	rit = _last;
 		rit++;
@@ -467,6 +467,51 @@ public:
 		}
 	}
 
+	void splice (ListIterator<T> position, List& x)
+	{
+		ListIterator<T> it = x.begin();
+		ListIterator<T> it1 = x.end();
+		this->insert(position, it, it1);
+		x.clear();
+	}
+
+	void splice (ListIterator<T> position, List& x, ListIterator<T> i)
+	{
+		ListIterator<T> tmp = i.getNode();
+		ListIterator<T> it1 = i.getNode();
+		it1++;
+		this->insert(position, i, it1);
+		tmp.getNode()->remove();
+	}
+
+	void splice (ListIterator<T> position, List& x, ListIterator<T> first, ListIterator<T> last)
+	{
+		ListIterator<T> tmp = first.getNode();
+		this->insert(position, first, last);
+		while (tmp != last)
+		{
+			tmp.getNode()->remove();
+			tmp++;
+		}
+	}
+
+	void	swap(List& x)
+	{
+		ListIterator<T> it = this->end();
+
+		it++;
+		this->splice(it, x);
+		std::cout << *it << std::endl;
+		ListIterator<T> it1 = this->begin();
+		ListIterator<T> it2 = x.end();
+		std::cout << *it1 << std::endl;
+		while (*it1 != *it)
+		{
+			it2.getNode()->pushAfter(it1.getNode());
+			it1++;
+		}
+		// to be continue
+	}
 };
 }
 

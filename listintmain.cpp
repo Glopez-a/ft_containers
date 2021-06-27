@@ -148,7 +148,7 @@ int main()
 
 	std::cout << *it1_int << std::endl;
 	std::cout << *it2_int << std::endl;
-		std::cout << "my int list is:";
+	std::cout << "my int list is:";
 	for (ft::ListIterator<int>	it_int = lst_int.begin(); it_int != lst_int.end(); it_int++)
 	 	std::cout << " " << *it_int;
 	std::cout << std::endl;
@@ -218,29 +218,6 @@ int main()
 	 	std::cout << " " << *it_int;
 	std::cout << std::endl;
 	std::cout << "size: " << new_lst.size() << std::endl;
-	std::cout << "Proving is a circular list..\n";
-	ft::ListIterator<int>	it3_int = new_lst.begin();
-	std::cout << *it3_int << std::endl;
-	it3_int++;
-	std::cout << *it3_int << std::endl;
-	it3_int++;
-	std::cout << *it3_int << std::endl;
-	it3_int++;
-	std::cout << *it3_int << std::endl;
-	it3_int++;
-	std::cout << *it3_int << std::endl;
-	it3_int++;
-	std::cout << *it3_int << std::endl;
-	it3_int++;
-	std::cout << *it3_int << std::endl;
-	it3_int++;
-	std::cout << *it3_int << std::endl;
-	it3_int++;
-	std::cout << *it3_int << std::endl;
-	it3_int++;
-	std::cout << *it3_int << std::endl;
-	it3_int++;
-	std::cout << *it3_int << std::endl;
 	new_lst.reverse();
 	std::cout << "Reverse new list\n";
 	std::cout << "my new list is:";
@@ -248,6 +225,68 @@ int main()
 	 	std::cout << " " << *it_int;
 	std::cout << std::endl;
 	std::cout << "size: " << new_lst.size() << std::endl;
+	std::cout << "my int list is:";
+	for (ft::ListIterator<int>	it_int = lst_int.begin(); it_int != lst_int.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	std::cout << "splice: insert new list in int list in position 2:\n";
+	it2_int++;
+	lst_int.splice(it2_int, new_lst);
+	std::cout << "my int list is:";
+	for (ft::ListIterator<int>	it_int = lst_int.begin(); it_int != lst_int.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	std::cout << "my new list is:";
+	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	std::cout << "splice: insert the second elemente of new list int the position 2 of int list:\n";
+	new_lst.push_back(15);
+	new_lst.push_back(25);
+	new_lst.push_back(35);
+	new_lst.push_back(45);
+	new_lst.push_back(55);
 
+	ft::ListIterator<int>	it7_int = new_lst.begin();
+	it7_int++;
+	it2_int = lst_int.begin();
+	it2_int++;
+	std::cout << *it2_int << std::endl;
+	lst_int.splice(it2_int, new_lst, it7_int);
+	std::cout << *it2_int << std::endl;
+
+	std::cout << "my int list is:";
+	for (ft::ListIterator<int>	it_int = lst_int.begin(); it_int != lst_int.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	it7_int = new_lst.begin();
+	it7_int++;
+	it5_int = new_lst.begin();
+	it5_int++;
+	it5_int++;
+	it5_int++;
+	std::cout << "my new list is:";
+	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	std::cout << "splice: insert from the second element to the fourth of new list in the position 2 of int list:\n";
+	lst_int.splice(it2_int, new_lst, it7_int, it5_int);
+	std::cout << "my int list is:";
+	for (ft::ListIterator<int>	it_int = lst_int.begin(); it_int != lst_int.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	std::cout << "my new list is:";
+	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	new_lst.swap(lst_int);
+		std::cout << "my int list is:";
+	for (ft::ListIterator<int>	it_int = lst_int.begin(); it_int != lst_int.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	std::cout << "my new list is:";
+	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
 	system("leaks a.out");
 }

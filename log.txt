@@ -48,9 +48,38 @@ my int list is: 42 31 24 2 5
 my new list is: 6 42 42 42 42 31 24 324 2
 my 2 list is: 15 5
 my 2 list is: 42 31 24 2 5
-
- STRING LIST
-last element: 
-last element: adios
-last element: 
-size: 0
+my 2 list is: 42 31 24 2 5 31
+my 2 list is: 42 24 2 5
+my 2 list is: 42 24
+my new list is: 6 42 42 42 42 31 24 324 2
+my new list is: 6 42 42 42 42 24 324 2
+my new list is: 6 42 42 42 42 24 324 2 25 25
+my new list is: 6 42 42 42 42 24 324 2 25 25 0 0
+my new list is: 6 42 42 42 42 24 324
+size: 7
+Proving is a circular list..
+6
+42
+42
+42
+42
+24
+324
+0
+6
+42
+42
+Reverse new list
+my new list is: 324 24 42 42 42 42 6
+size: 7
+my int list is: 42 31 24 2 5
+splice: insert new list in int list in position 2:
+my int list is: 42 324 24 42 42 42 42 6 31 24 2 5
+my new list is:
+splice: insert the second elemente of new list int the position 2 of int list:
+324
+324
+my int list is: 42 25 324 24 42 42 42 42 6 31 24 2 5
+my new list is: 15 35 45 55
+splice: insert from the second element to the fourth of new list in the position 2 of int list:
+my int list is: 42 25 35 45 324 24 42 42 42 42 6 31 24 2 5
