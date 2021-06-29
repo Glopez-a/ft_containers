@@ -1,5 +1,6 @@
 #include "Node.hpp"
 #include "List.hpp"
+#include <math.h>
 
 // a predicate implemented as a function:
 bool single_digit (const int& value) { return (value<10); }
@@ -7,6 +8,16 @@ bool single_digit (const int& value) { return (value<10); }
 // a predicate implemented as a class:
 struct is_odd {
   bool operator() (const int& value) { return (value%2)==1; }
+};
+
+// a binary predicate implemented as a function:
+bool same_integral_part (double first, double second)
+{ return ( int(first)==int(second) ); }
+
+// a binary predicate implemented as a class:
+struct is_near {
+  bool operator() (double first, double second)
+  { return (fabs(first-second)<5.0); }
 };
 
 int main()
@@ -279,11 +290,26 @@ int main()
 	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
 	 	std::cout << " " << *it_int;
 	std::cout << std::endl;
+	std::cout << "swap int list and new list:\n";
 	new_lst.swap(lst_int);
 		std::cout << "my int list is:";
 	for (ft::ListIterator<int>	it_int = lst_int.begin(); it_int != lst_int.end(); it_int++)
 	 	std::cout << " " << *it_int;
 	std::cout << std::endl;
+	std::cout << "my new list is:";
+	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	new_lst.push_back(5);
+	new_lst.push_back(5);
+	new_lst.push_back(4);
+	new_lst.push_back(4);
+	std::cout << "my new list is:";
+	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
+	 	std::cout << " " << *it_int;
+	std::cout << std::endl;
+	std::cout << "use unique:\n";
+	new_lst.unique();
 	std::cout << "my new list is:";
 	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
 	 	std::cout << " " << *it_int;

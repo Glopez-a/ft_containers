@@ -8,18 +8,9 @@
 
 namespace ft
 {
-	// template<typename T>
-	// T const &max(T const &a, T const &b)
-	// {
-	// 	return (a < b ? b : a);
-	// }
-	// template<typename T>
-	// T const &min(T const &a, T const &b)
-	// {
-	// 	return (a > b ? b : a);
-	// }
 bool mycomparison (double first, double second)
 { return ( int(first)<int(second) ); }
+
 
 template <typename T>
 class ListIterator
@@ -498,19 +489,43 @@ public:
 	void	swap(List& x)
 	{
 		ListIterator<T> it = this->end();
-
 		it++;
 		this->splice(it, x);
-		std::cout << *it << std::endl;
 		ListIterator<T> it1 = this->begin();
 		ListIterator<T> it2 = x.end();
-		std::cout << *it1 << std::endl;
-		while (*it1 != *it)
+		ListIterator<T> it3 = this->end();
+		x.splice(it2, *this, it, it3);
+	}
+
+	void	unique()
+	{
+		ListIterator<T> it = this->begin();
+		T	x = it.getNode()->getContent();
+		it++;
+		for (; it != this->end(); it++)
 		{
-			it2.getNode()->pushAfter(it1.getNode());
-			it1++;
+			if (x == it.getNode()->getContent())
+				it.getNode()->getPrevious()->remove();
+			x = *it;
 		}
-		// to be continue
+	}
+
+	template <class BinaryPredicate>
+	void	unique(BinaryPredicate binary_pred)
+	{
+		ListIterator<T> it = this->begin();
+		T	x = it.getNode()->getContent();
+		it++;
+		for (; it != this->end(); it++)
+		{
+			if (binary_pred(x, it.getNode()->getContent()))
+			{
+				it++;
+				it.getNode()->getPrevious()->remove();
+				it--;
+			}
+			x = *it;
+		}
 	}
 };
 }
