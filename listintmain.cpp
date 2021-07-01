@@ -314,5 +314,26 @@ int main()
 	for (ft::ListIterator<int>	it_int = new_lst.begin(); it_int != new_lst.end(); it_int++)
 	 	std::cout << " " << *it_int;
 	std::cout << std::endl;
+	ft::ReverseIterator<int> rit = new_lst.rbegin();
+	std::cout << "Reverse iterator starting from the end:\n";
+	std::cout << *rit << std::endl;
+	rit++;
+	std::cout << *rit << std::endl;
+	rit++;
+	std::cout << *rit << std::endl;
+	rit++;
+	std::cout << *rit << std::endl;	
+	rit++;
+	std::cout << *rit << std::endl;
+	rit++;
+	std::cout << *rit << std::endl;
+	rit = new_lst.rend();
+	std::cout << "Reverse iterator starting from the start:\n";
+	rit--;
+	std::cout << *rit << std::endl;
+	rit--;
+	std::cout << *rit << std::endl;	
+	rit--;
+	std::cout << *rit << std::endl;
 	system("leaks a.out");
 }

@@ -82,14 +82,14 @@ class ListIterator
 };
 
 template <typename T>
-class ListReverseIterator
+class ReverseIterator
 {
 	protected:
 		Node<T>	*_n;
 	public:
-		ListReverseIterator(): _n(nullptr) {}
-		ListReverseIterator(Node<T> *nod): _n(nod) {}
-		virtual ~ListReverseIterator() {}
+		ReverseIterator(): _n(nullptr) {}
+		ReverseIterator(Node<T> *nod): _n(nod) {}
+		virtual ~ReverseIterator() {}
 		Node<T>	*&getNode()
 		{
 			return (_n);
@@ -100,19 +100,19 @@ class ListReverseIterator
 				return true;
 			return false;
 		}
-		ListReverseIterator operator++(int) 
+		ReverseIterator operator++(int) 
 		{
-			ListReverseIterator tmp(*this);
+			ReverseIterator tmp(*this);
 			_n = _n->getPrevious();
 			return (tmp);
 		}
-		ListReverseIterator operator--(int) 
+		ReverseIterator operator--(int) 
 		{
-			ListReverseIterator tmp(*this);
+			ReverseIterator tmp(*this);
 			_n = _n->getNext();
 			return (tmp);
 		}
-		ListReverseIterator &operator+=(int value)
+		ReverseIterator &operator+=(int value)
 		{
 			if (value > 0)
 				for (int i = 0; i < value; i++)
@@ -123,23 +123,23 @@ class ListReverseIterator
 			return (*this);
 		}
 		
-		ListReverseIterator &operator-=(int value)
+		ReverseIterator &operator-=(int value)
 		{
 			operator+=(-value);
 			return (*this);
 		}
 
-		ListReverseIterator &operator+(int value)
+		ReverseIterator &operator+(int value)
 		{
 			return(*this += value);
 		}
 
-		bool	operator!=(ListReverseIterator<T> const &src) const
+		bool	operator!=(ReverseIterator<T> const &src) const
 		{
 			return (_n != src._n);
 		}
 
-		bool	operator==(ListReverseIterator<T> const &src) const
+		bool	operator==(ReverseIterator<T> const &src) const
 		{
 			return (_n == src._n);
 		}
@@ -295,15 +295,25 @@ public:
 		}
 	}
 
-	// unsigned int	max_size() const
-	// {
-	// 	return (ft::min((T) std::numeric_limits<ptrdiff_t>::max(),
-	// 					std::numeric_limits<T>::max() / (sizeof(Node<T>) - sizeof(T*))));
-	// }
-
 	void	merge(List &x)
 	{
-		//
+		ListIterator<T> ix = x.begin();
+		ListIterator<T> ix1 = x.end();
+
+		ListIterator<T> it = this->begin();
+		ListIterator<T> it1 = this->end();
+
+		while (it != it1 && ix != ix1)
+		{
+			if (ix.getNode()->getContent() < it.getNode()->getContent())
+			{
+				ix++;
+				it.getNode()->pushBefore(ix.getNode()->getPrevious());
+				ix.getNode()->getPrevious()->remove();
+			}
+			else
+				it++;
+		}
 	}
 
 	void	merge(List &x, bool comp)
@@ -352,11 +362,19 @@ public:
 		_size++;
 	}
 
-	/*
-	reverse_iterator	rbegin()
+	
+	ReverseIterator<T>	rbegin()
+	{
+		ReverseIterator<T> rit(_last->getPrevious());
+		return (rit);
+	}
 
-	const reverse_iterator	rbegin() const
-	*/
+	const ReverseIterator<T>	rbegin() const
+	{
+		ReverseIterator<T> rit(_last);
+		return (rit);
+	}
+	
 
 	void	remove(T const & val)
 	{
@@ -383,11 +401,18 @@ public:
 			}
 	}
 
-	/*
-	reverse_iterator rend()
-	const_reverse_iterator rend() const
-	*/
+	ReverseIterator<T>	rend()
+	{
+		ReverseIterator<T> rit(_first);
+		return (rit);
+	}
 
+	const ReverseIterator<T>	rend() const
+	{
+		ReverseIterator<T> rit(_first);
+		return (rit);
+	}
+	
 	void	resize(unsigned n, T val = T())
 	{
 		if (_size < n)
@@ -409,7 +434,7 @@ public:
 	{
 		unsigned int i = 0;
 		ft::ListIterator<T>	it = _first;
-		ft::ListReverseIterator<T>	rit = _last;
+		ft::ReverseIterator<T>	rit = _last;
 		rit++;
 		it++;
 		while (i < _size / 2 + 1)

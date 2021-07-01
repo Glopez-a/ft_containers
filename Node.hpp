@@ -62,26 +62,16 @@ public:
 
 	void	pushAfter(Node<T> *src)
 	{
-		if (_next)
-		{
-			src->_next = _next;
-			_next->_previous = src;
-		}
-		else
-			src->_next = nullptr;
+		src->_next = _next;
+		_next->_previous = src;
 		src->_previous = this;
 		_next = src;
 	}
 
 	void	pushBefore(Node<T> *src)
 	{
-		if (_previous)
-		{
-			src->_previous = _previous;
-			_previous->_next = src;
-		}
-		else
-			src->_previous = nullptr;
+		src->_previous = _previous;
+		_previous->_next = src;
 		src->_next = this;
 		_previous = src;
 	}
