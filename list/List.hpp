@@ -1,7 +1,7 @@
 #ifndef LIST_HPP
 #define LIST_HPP
 
-#include "Node.hpp"
+#include "../Node.hpp"
 #include <iostream>
 # include <limits>
 
@@ -169,10 +169,10 @@ private:
 public:
 	List() {reset();}
 	
-	List(unsigned n, T const & cont):
-		_size(n)
+	List(unsigned n, T const & cont)
 	{
-		//pendiente
+		reset();
+		assign(n, cont);
 	}
 
 	~List() {clear();}
@@ -305,34 +305,58 @@ public:
 
 		while (it != it1 && ix != ix1)
 		{
-			if (ix.getNode()->getContent() < it.getNode()->getContent())
+			if (ix.getNode()->getContent() <= it.getNode()->getContent())
 			{
-				ix++;
-				it.getNode()->pushBefore(ix.getNode()->getPrevious());
-				ix.getNode()->getPrevious()->remove();
+				x._first->getNext() = ix.getNode()->getNext();
+				--x._size;
+				ix.getNode()->disconect();
+				it.getNode()->pushBefore(ix.getNode());
+				if (it == this->begin())
+					_first = _first->getPrevious();
+				_size++;
+				ix = x.begin();
 			}
 			else
 				it++;
 		}
+		this->splice(it1, x);
 	}
 
-	void	merge(List &x, bool comp)
+	template <typename compare>
+	void	merge(List &x, compare comp)
 	{
-		if (&x == this)
-		if (!_size)
+		ListIterator<T> ix = x.begin();
+		ListIterator<T> ix1 = x.end();
+
+		ListIterator<T> it = this->begin();
+		ListIterator<T> it1 = this->end();
+
+		while (it != it1 && ix != ix1)
 		{
-			assign(x.begin(), x.end());
-			x.clear();
+			if ((*comp)(*ix, *it))
+			{
+				x._first->getNext() = ix.getNode()->getNext();
+				--x._size;
+				ix.getNode()->disconect();
+				it.getNode()->pushBefore(ix.getNode());
+				if (it == this->begin())
+					_first = _first->getPrevious();
+				_size++;
+				ix = x.begin();
+			}
+			else
+				it++;
 		}
+		this->splice(it1, x);
 	}
 
 	List	&operator=(const List &x)
 	{
 		clear();
-		ft::ListIterator<int>	it_int = x._first;
-		it_int++;
-		for (;it_int != x._last; it_int++)
-			push_back(it_int.getNode()->getContent());
+		ft::ListIterator<T>	it = x._first;
+		it++;
+		for (;it != x._last; it++)
+			push_back(it.getNode()->getContent());
 		return (*this);
 	}
 
@@ -378,12 +402,12 @@ public:
 
 	void	remove(T const & val)
 	{
-		ft::ListIterator<int>	it_int = _first;
-		it_int++;
-		for (;it_int != _last; it_int++)
-			if (it_int.getNode()->getContent() == val)
+		ft::ListIterator<T>	it_T = _first;
+		it_T++;
+		for (;it_T != _last; it_T++)
+			if (it_T.getNode()->getContent() == val)
 			{
-				it_int.getNode()->remove();
+				it_T.getNode()->remove();
 				_size--;
 			}
 	}
@@ -417,12 +441,12 @@ public:
 	{
 		if (_size < n)
 		{
-			ft::ListIterator<int>	it = _last;
+			ft::ListIterator<T>	it = _last;
 			this->insert(it, n - _size, val);
 		}
 		else if (_size > n)
 		{
-			ft::ListIterator<int>	it = _first;
+			ft::ListIterator<T>	it = _first;
 			for (unsigned int i = 0; i < n; i++)
 				it++;
 			it++;

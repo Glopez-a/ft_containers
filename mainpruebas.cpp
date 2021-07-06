@@ -1,36 +1,48 @@
 #include <iostream>
-#include "List.hpp"
+#include <list>
 
 bool mycomparison (double first, double second)
 { return ( int(first)<int(second) ); }
 
 int main ()
 {
-  ft::List<double> first, second;
+	std::list<std::string>	lst_str;
+  
+  lst_str.push_back("hola");
+  lst_str.push_back("adios");
+	lst_str.push_back("asdads");
 
-  first.push_back (5.1);
-  first.push_back (2.2);
-  first.push_back (2.9);
-
-  second.push_back (3.7);
-  second.push_back (7.1);
-  second.push_back (2.4);
 
   std::cout << "first contains:";
-  for (ft::ListIterator<double> it=first.begin(); it!=first.end(); it++)
+  for (std::list<std::string>::iterator it=lst_str.begin(); it!=lst_str.end(); it++)
     std::cout << ' ' << *it;
   std::cout << '\n';
 
-  std::cout << "second contains:";
-  for (ft::ListIterator<double> it=second.begin(); it!=second.end(); it++)
-    std::cout << ' ' << *it;
-  std::cout << '\n';
+  // ft::List<double> first, second;
+
+  // first.push_back (5.1);
+  // first.push_back (2.2);
+  // first.push_back (2.9);
+
+  // second.push_back (3.7);
+  // second.push_back (7.1);
+  // second.push_back (2.4);
+
+  // std::cout << "first contains:";
+  // for (ft::ListIterator<double> it=first.begin(); it!=first.end(); it++)
+  //   std::cout << ' ' << *it;
+  // std::cout << '\n';
+
+  // std::cout << "second contains:";
+  // for (ft::ListIterator<double> it=second.begin(); it!=second.end(); it++)
+  //   std::cout << ' ' << *it;
+  // std::cout << '\n';
 
 
-  first.sort();
-  second.sort();
+  // first.sort();
+  // second.sort();
 
-  first.merge(second);
+  // first.merge(second);
 
   // (second is now empty)
 
@@ -38,10 +50,10 @@ int main ()
 
 //   first.merge(second,mycomparison);
 
-  std::cout << "first contains:";
-  for (ft::ListIterator<double> it=first.begin(); it!=first.end(); it++)
-    std::cout << ' ' << *it;
-  std::cout << '\n';
+  // std::cout << "first contains:";
+  // for (ft::ListIterator<double> it=first.begin(); it!=first.end(); it++)
+  //   std::cout << ' ' << *it;
+  // std::cout << '\n';
 
 //   std::cout << "second contains:";
 //   for (ft::ListIterator<double> it=second.begin(); it!=second.end(); it++)

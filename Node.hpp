@@ -97,6 +97,12 @@ public:
 		_next->_previous = _previous;
 		delete (this);
 	}
+
+	void	disconect()
+	{
+		_previous->_next = _next;
+		_next->_previous = _previous;
+	}
 };
 
 template <typename T>
