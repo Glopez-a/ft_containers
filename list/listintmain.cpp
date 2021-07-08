@@ -1,4 +1,4 @@
-#include "Node.hpp"
+#include "../Node.hpp"
 #include "List.hpp"
 #include <math.h>
 
@@ -335,5 +335,7 @@ int main()
 	std::cout << *rit << std::endl;	
 	rit--;
 	std::cout << *rit << std::endl;
+
+	std::cout << new_lst.max_size() << std::endl;
 	system("leaks a.out");
 }

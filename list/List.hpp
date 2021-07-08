@@ -350,6 +350,11 @@ public:
 		this->splice(it1, x);
 	}
 
+	unsigned int	max_size() const
+	{
+		return (std::allocator<T>.max_size(this));
+	}
+
 	List	&operator=(const List &x)
 	{
 		clear();
