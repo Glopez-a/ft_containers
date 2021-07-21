@@ -1,7 +1,7 @@
 #ifndef LIST_HPP
 #define LIST_HPP
 
-#include "../Node.hpp"
+#include "Node.hpp"
 #include <iostream>
 # include <limits>
 
