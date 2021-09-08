@@ -10,7 +10,7 @@ void	print_vec(ft::vector<T> vec)
 		std::cout << *it << " ";
 	std::cout << std::endl;
 	std::cout << "Size: " << vec.size() << std::endl;
-	std::cout << "Capacity: " << vec.capacity() << std::endl << std::endl;
+	//std::cout << "Capacity: " << vec.capacity() << std::endl << std::endl;
 }
 
 template <>
@@ -21,7 +21,7 @@ void	print_vec(ft::vector<std::string> vec)
 		std::cout << *it << " ";
 	std::cout << std::endl;
 	std::cout << "Size: " << vec.size() << std::endl;
-	std::cout << "Capacity: " << vec.capacity() << std::endl << std::endl;
+	//std::cout << "Capacity: " << vec.capacity() << std::endl << std::endl;
 }
 
 template <>
@@ -32,7 +32,7 @@ void	print_vec(ft::vector<double> vec)
 		std::cout << *it << " ";
 	std::cout << std::endl;
 	std::cout << "Size: " << vec.size() << std::endl;
-	std::cout << "Capacity: " << vec.capacity() << std::endl << std::endl;
+	//std::cout << "Capacity: " << vec.capacity() << std::endl << std::endl;
 }
 
 int	main()
@@ -179,7 +179,48 @@ int	main()
 	std::cout << std::endl;
 	print_vec(vec_int3);
 
+	print_vec(vec_int);
+	std::cout << "my int reverse vector is: ";
+	for (ft::vector<int>::reverse_iterator it = vec_int.rbegin(); it != vec_int.rend(); ++it)
+		std::cout << *it << " ";
+	std::cout << std::endl;
 
+
+	std::cout << "\n*Relational operators*\n\n";
+
+	print_vec(vec_int);
+	print_vec(vec_int2);
+	print_vec(vec_int3);
+
+	if (vec_int == vec_int2)
+		std::cout << "vec_int is iqual to vec_int2.. \n";
+	else
+		std::cout << "vec_int and vec_int2 arent iquals.. \n";
+
+	vec_int.assign(vec_int3.begin(), vec_int3.end());
+	print_vec(vec_int);
+	print_vec(vec_int3);
+	if (vec_int == vec_int3)
+		std::cout << "vec_int is iqual to vec_int3.. \n";
+	else
+		std::cout << "vec_int and vec_int3 arent iquals.. \n";
+
+	vec_int3.push_back(7);
+	vec_int.push_back(3);
+	print_vec(vec_int);
+	print_vec(vec_int3);
+	if (vec_int < vec_int3)
+		std::cout << "vec_int is smaller than vec_int3.. \n";
+	else
+		std::cout << "vec_int is bigger than vec_int3.. \n";
+	
+	print_vec(vec_int);
+	print_vec(vec_int3);
+	vec_int3.push_back(1);
+	if (vec_int > vec_int3)
+		std::cout << "vec_int is smaller than vec_int3.. \n";
+	else
+		std::cout << "vec_int is bigger than vec_int3.. \n";
 	
 	return (0);
 }

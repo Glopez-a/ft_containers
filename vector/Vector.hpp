@@ -2,7 +2,7 @@
 #define VECTOR_HPP
 
 #include "../utils/utils.hpp"
-#include "../utils/reverse_iterator.hpp"
+#include "../utils/algorithm.hpp"
 #include <iostream>
 # include <limits>
 
@@ -88,8 +88,85 @@ namespace ft
 					return (_ptr - x.getPointer());
 				}
 
-				friend class	vector;
-				friend class	reverse_iterator<vectorIterator>;			
+				friend class	vector;	
+			};
+
+
+
+
+		class vectorReverseIterator
+		{
+			typedef T value_type;
+			typedef T * pointer;
+			typedef T & reference;
+			typedef	std::ptrdiff_t	difference_type;
+			typedef std::size_t size_type;
+
+			private:
+				value_type	*	_ptr;
+			public:
+				vectorReverseIterator(void): _ptr(nullptr) {}
+				vectorReverseIterator(pointer ptr): _ptr(ptr) {}
+				vectorReverseIterator(const vectorReverseIterator& src): _ptr(src._ptr) {}
+				vectorReverseIterator &operator=(const vectorReverseIterator& src)
+				{
+					if (this == &src)
+						return (*this);
+					this->_ptr = src._ptr;
+					return (*this);
+				}
+				virtual	~vectorReverseIterator() {}
+				pointer getPointer() const {return(_ptr);}
+				reference	operator*(void) {return(*_ptr);}
+				pointer		operator->(void) {return(&(this->operator*()));}
+				vectorReverseIterator&	operator++(void) 
+				{
+					_ptr--;
+					return(*this);
+				}
+				vectorReverseIterator operator++(int)
+				{
+					vectorReverseIterator dst(*this);
+					this->operator++();
+					return(dst);
+				}
+				vectorReverseIterator&	operator--(void) 
+				{
+					_ptr++;
+					return(*this);
+				}
+				vectorReverseIterator operator--(int)
+				{
+					vectorReverseIterator dst(*this);
+					this->operator--();
+					return(dst);
+				}
+				vectorReverseIterator&	operator+(int n) {return(_ptr - n);}
+				vectorReverseIterator&	operator-(int n) {return(_ptr + n);}
+				vectorReverseIterator& operator+=(int n)
+				{
+					_ptr -= n;
+					return (*this);
+				}
+				vectorReverseIterator& operator-=(int n)
+				{
+					_ptr += n;
+					return (*this);
+				}
+				reference operator[](int n) {return (*(operator+(n)));}
+				bool	operator==(const vectorReverseIterator& x) const	{return (_ptr == x.getPointer());}
+				bool	operator!=(const vectorReverseIterator& x) const	{return (_ptr != x.getPointer());}
+				bool	operator>=(const vectorReverseIterator& x) const	{return (_ptr >= x.getPointer());}
+				bool	operator<=(const vectorReverseIterator& x) const	{return (_ptr <= x.getPointer());}
+				bool	operator>(const vectorReverseIterator& x) const	{return (_ptr > x.getPointer());}
+				bool	operator<(const vectorReverseIterator& x) const	{return (_ptr < x.getPointer());}
+				
+				difference_type	operator-(const vectorReverseIterator & x) const 
+				{ 
+					return (_ptr - x.getPointer());
+				}
+
+				friend class	vector;			
 			};
 
 		public: 
@@ -103,8 +180,8 @@ namespace ft
 			typedef typename allocator_type::const_pointer      const_pointer;
 			typedef vectorIterator								iterator;
 			typedef const vectorIterator						const_iterator;
-			typedef ft::reverse_iterator<iterator>				reverse_iterator;
-			typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
+			typedef vectorReverseIterator						reverse_iterator;
+			typedef const vectorReverseIterator			 		const_reverse_iterator;
 
 
 		private:
@@ -248,7 +325,6 @@ namespace ft
 
 				for (InputIterator it = first; it != last; it++)
 					n++;
-				std::cout << n << " n\n";
 				if (_size + n > _capacity)
 					this->reserve(_size + n);
 				for (size_type i = 0; i < _size - diff; i++)
@@ -302,13 +378,13 @@ namespace ft
 	
 			// Reverse_iterators
 
-			reverse_iterator rbegin (void) {return (iterator(_vec + _size - 1));}
+			reverse_iterator rbegin (void) {return (reverse_iterator(_vec + _size - 1));}
 
-			const_reverse_iterator rbegin (void) const {return(const_iterator (_vec + _size + 1));}
+			const_reverse_iterator rbegin (void) const {return(const_reverse_iterator (_vec + _size + 1));}
 
-			reverse_iterator rend (void) {return (iterator(_vec - 1));}
+			reverse_iterator rend (void) {return (reverse_iterator(_vec - 1));}
 
-			const_reverse_iterator	rend (void) const {return (iterator(_vec - 1));}
+			const_reverse_iterator	rend (void) const {return (const_reverse_iterator(_vec - 1));}
 	
 
 
@@ -394,9 +470,52 @@ namespace ft
 			}
 
 			allocator_type	get_allocator (void) const {return (_alloc);}
-			
 
 	};
+
+	// Relational operators
+
+	template <class T, class Alloc>
+	bool operator==(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+		return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+	}
+
+	template <class T, class Alloc>
+	bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+		return (!ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+	}
+
+	template <class T, class Alloc>
+	bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	}
+
+	template <class T, class Alloc>
+	bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+		return (!ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end()));
+	}
+
+	template <class T, class Alloc>
+	bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+		return (ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end()));
+	}
+
+	template <class T, class Alloc>
+	bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+		return (!ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	}
+
+	template <class T, class Alloc>
+	void swap (vector<T,Alloc> & x, vector<T,Alloc> & y)
+	{
+		x.swap(y);
+	}
 }
 
 
