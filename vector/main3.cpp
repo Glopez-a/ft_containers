@@ -17,7 +17,7 @@ template <>
 void	print_vec(std::vector<std::string> vec)
 {
 	std::cout << "my string vector is: ";
-	for (typename std::vector<std::string>::iterator it = vec.begin(); it != vec.end(); ++it)
+	for (std::vector<std::string>::iterator it = vec.begin(); it != vec.end(); ++it)
 		std::cout << *it << " ";
 	std::cout << std::endl;
 	std::cout << "Size: " << vec.size() << std::endl;
@@ -28,7 +28,7 @@ template <>
 void	print_vec(std::vector<double> vec)
 {
 	std::cout << "my double vector is: ";
-	for (typename std::vector<double>::iterator it = vec.begin(); it != vec.end(); ++it)
+	for (std::vector<double>::iterator it = vec.begin(); it != vec.end(); ++it)
 		std::cout << *it << " ";
 	std::cout << std::endl;
 	std::cout << "Size: " << vec.size() << std::endl;
@@ -185,6 +185,56 @@ int	main()
 		std::cout << *it << " ";
 	std::cout << std::endl;
 
+	std::cout << "\n*Erase*\n\n";
+
+	std::vector<int>::iterator it9 = vec_int.begin();
+	it9++;
+	it9++;
+	it9++;
+	it9++;
+
+	print_vec(vec_int);
+	std::cout << *it9 << std::endl;
+	vec_int.erase(it9);
+	print_vec(vec_int);
+
+
+	std::cout << "\n*Relational operators*\n\n";
+
+	print_vec(vec_int);
+	print_vec(vec_int2);
+	print_vec(vec_int3);
+
+	if (vec_int == vec_int2)
+		std::cout << "vec_int is iqual to vec_int2.. \n";
+	else
+		std::cout << "vec_int and vec_int2 arent iquals.. \n";
+
+	vec_int.assign(vec_int3.begin(), vec_int3.end());
+	print_vec(vec_int);
+	print_vec(vec_int3);
+	if (vec_int == vec_int3)
+		std::cout << "vec_int is iqual to vec_int3.. \n";
+	else
+		std::cout << "vec_int and vec_int3 arent iquals.. \n";
+
+	vec_int3.push_back(7);
+	vec_int.push_back(3);
+	print_vec(vec_int);
+	print_vec(vec_int3);
+	if (vec_int < vec_int3)
+		std::cout << "vec_int is smaller than vec_int3.. \n";
+	else
+		std::cout << "vec_int is bigger than vec_int3.. \n";
+	
+	print_vec(vec_int);
+	print_vec(vec_int3);
+	vec_int3.push_back(1);
+	if (vec_int > vec_int3)
+		std::cout << "vec_int is smaller than vec_int3.. \n";
+	else
+		std::cout << "vec_int is bigger than vec_int3.. \n";
+	
 
 
 	

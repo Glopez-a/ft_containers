@@ -17,7 +17,7 @@ template <>
 void	print_vec(ft::vector<std::string> vec)
 {
 	std::cout << "my string vector is: ";
-	for (typename ft::vector<std::string>::iterator it = vec.begin(); it != vec.end(); ++it)
+	for (ft::vector<std::string>::iterator it = vec.begin(); it != vec.end(); ++it)
 		std::cout << *it << " ";
 	std::cout << std::endl;
 	std::cout << "Size: " << vec.size() << std::endl;
@@ -28,7 +28,7 @@ template <>
 void	print_vec(ft::vector<double> vec)
 {
 	std::cout << "my double vector is: ";
-	for (typename ft::vector<double>::iterator it = vec.begin(); it != vec.end(); ++it)
+	for (ft::vector<double>::iterator it = vec.begin(); it != vec.end(); ++it)
 		std::cout << *it << " ";
 	std::cout << std::endl;
 	std::cout << "Size: " << vec.size() << std::endl;
@@ -184,6 +184,20 @@ int	main()
 	for (ft::vector<int>::reverse_iterator it = vec_int.rbegin(); it != vec_int.rend(); ++it)
 		std::cout << *it << " ";
 	std::cout << std::endl;
+
+	std::cout << "\n*Erase*\n\n";
+
+	ft::vector<int>::iterator it9 = vec_int.begin();
+	it9++;
+	it9++;
+	it9++;
+	it9++;
+
+	print_vec(vec_int);
+	std::cout << *it9 << std::endl;
+	vec_int.erase(it9);
+	print_vec(vec_int);
+
 
 
 	std::cout << "\n*Relational operators*\n\n";

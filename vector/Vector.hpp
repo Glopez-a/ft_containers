@@ -63,8 +63,8 @@ namespace ft
 					this->operator--();
 					return(dst);
 				}
-				vectorIterator&	operator+(int n) {return(_ptr + n);}
-				vectorIterator&	operator-(int n) {return(_ptr - n);}
+				vectorIterator operator+(difference_type n) { return vectorIterator(_ptr + n); }
+				vectorIterator operator-(difference_type n) { return vectorIterator(_ptr - n); }
 				vectorIterator& operator+=(int n)
 				{
 					_ptr += n;
@@ -334,6 +334,33 @@ namespace ft
 				_size = _size + n;
 			}
 
+			// Erase
+
+			iterator erase(iterator position) {
+				return erase(position, position + 1);
+			}
+			
+			iterator erase(iterator first, iterator last) {
+				iterator it = this->begin();
+				size_type n = last - first;
+				size_type index = 0;
+				while (it != first) {
+					++it;
+					++index;
+				}
+				if (n <= 0)
+					return last;
+				std::allocator<T> alloc;
+				for (size_t i = index; i < index + n; i++)
+					alloc.destroy(&_vec[i]);
+				for (size_t i = index + n; i < _size; i++)
+				{
+					new (&_vec[i - n]) value_type(_vec[i]);
+					alloc.destroy(&_vec[i]);
+				}
+				_size -= n;
+				return first;
+			}
 			// Member access
 
 			reference operator[](size_type n) {return (*(_vec + n));}
