@@ -31,7 +31,44 @@ class Node
 
         void    checkBalance(Node<T> * node)
         {
-            if ()
+            if (abs(height(node->_left) - height(node->_right)) > 1)
+                rebalance(node);
+            if (node->_parent)
+                checkBalance(node->_parent);
+        }
+
+        void    rebalance(Node<T> * node)
+        {
+            bool    is_right;
+            if (node->_parent)
+                is_right = node->_parent->_right == node;
+            if (height(node->_right) - height(node->_left) > 1))
+            {
+                if (height(node->right->right > node->right->left))
+                    node = leftRotation(node);
+            }
+        }
+
+        Node<T> *leftRotation(Node<T> *node)
+        {
+            Node<T> *tmp = node->_right;
+            node->_right = tmp->_left;
+            tmp->_left = node;
+            node->_parent = tmp;
+            if (node->_right)
+                node->_right->_parent = node;
+            return (tmp);
+        }
+
+        Node<T> *rightRotation(Node<T> *node)
+        {
+            Node<T> *tmp = node->_left;
+            node->_left = tmp->_right;
+            tmp->_right = node;
+            node->_parent = tmp;
+            if (node->_left)
+                node->_left->_parent = node;
+            return (tmp);
         }
 };
 
