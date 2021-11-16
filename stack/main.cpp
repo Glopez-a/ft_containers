@@ -21,6 +21,4 @@ int	main()
 	std::cout << "my_stack size is " << my_stack.size() << std::endl;
 	std::cout << "my_2stack size is " << my_2stack.size() << std::endl;
 
-
-
 }
