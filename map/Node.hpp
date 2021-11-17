@@ -1,6 +1,15 @@
 #ifndef NODE_HPP
 #define NODE_HPP
 
+# include <cmath>
+# include <string>
+# include <iostream>
+# include <iomanip>
+# include <ctype.h>
+# include <stdlib.h>
+# include <memory>
+# include <stdexcept>
+
 template<class T>
 class Node
 {
@@ -14,8 +23,8 @@ class Node
 
         // CONSTRUCTORS
 
-        Node(T data): _parent(nullptr), _left(nullptr), _right(nullptr), _data(data) {}
-        Node(): _parent(nullptr), _left(nullptr), _right(nullptr) {}
+        Node(T data): _parent(NULL), _left(NULL), _right(NULL), _data(data) {}
+        Node(): _parent(NULL), _left(NULL), _right(NULL) {}
 
         // MEMBER FUNTIONS
         int height(Node<T> * node)
@@ -42,7 +51,7 @@ class Node
             bool    is_right;
             if (node->_parent)
                 is_right = node->_parent->_right == node;
-            if (height(node->_right) - height(node->_left) > 1))
+            if ((height(node->_right) - height(node->_left)) > 1)
             {
                 if (height(node->right->right > node->right->left))
                     node = leftRotation(node);

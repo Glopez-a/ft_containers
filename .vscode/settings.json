@@ -1,5 +1,6 @@
 {
 	"files.associations": {
+		"editor.multiCursorModifier": "ctrlCmd",
 		"list": "cpp",
 		"iostream": "cpp",
 		"array": "cpp",
@@ -46,6 +47,11 @@
 		"streambuf": "cpp",
 		"typeinfo": "cpp",
 		"cstring": "cpp",
-		"__node_handle": "cpp"
+		"__node_handle": "cpp",
+		"map": "cpp",
+		"__functional_03": "cpp",
+		"__hash_table": "cpp",
+		"__split_buffer": "cpp",
+		"__tree": "cpp"
 	}
 }

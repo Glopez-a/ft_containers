@@ -29,7 +29,7 @@ namespace ft
 
 			void push (const value_type& val)
 			{
-				_ctnr.push_back();
+				_ctnr.push_back(val);
 			}
 
 			void pop()
