@@ -2,8 +2,7 @@
 #define TREE_HPP
 
 #include "Node.hpp"
-#include "../utils/utils.hpp"
-#include "../utils/pair.hpp"
+# include "../utils/utils.hpp"
 
 
 template <class Key, class Value, class Compare, class Alloc>
@@ -24,11 +23,11 @@ class Tree
             _root = NULL;
             _size = 0;
             _rend = _alloc.allocate(1);
-            _alloc.construc(_rend);
+            _alloc.construct(_rend);
             _end = _alloc.allocate(1);
-            _alloc.construc(_end);
-            _rend->right = _end;
-            _end->parent = _rend;
+            _alloc.construct(_end);
+            _rend->_right = _end;
+            _end->_parent = _rend;
         }
 
         void destroy(Node<ft::pair<Key, Value> > *node)
@@ -94,9 +93,9 @@ class Tree
         {
             if (node == NULL)
                 return NULL;
-            if (node != end && node != rend && node->_data.first == k)
+            if (node != _end && node != _rend && node->_data.first == k)
                 return node;
-            if (node == end || compare()(k, node->_data.first))
+            if (node == _end || Compare()(k, node->_data.first))
             {
                 if (node->_left)
                     return (findIt(node->_left, k));
@@ -110,7 +109,28 @@ class Tree
             }
         }
 
-        
+        bool    is_null(Node<ft::pair<Key, Value> > *node) { return (node == NULL || node == _end || node == _rend); }
+
+        Node<ft::pair<Key, Value> > *get_begin()
+        {
+            if (_size == 0)
+                return _end;
+            if (_rend->right)
+                return _rend->right;
+            return _rend->parent;
+        }
+
+        Node<ft::pair<Key, Value> > *get_rbegin()
+        {
+            if (_size == 0)
+                return _rend;
+            if (_end->left)
+                return _end->left;
+            return _end->parent;
+        }
+
+        Node<ft::pair<Key, Value> > *get_end() { return _end; }
+        Node<ft::pair<Key, Value> > *get_rend() { return _rend; } 
 
 };
 

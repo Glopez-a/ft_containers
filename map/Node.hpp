@@ -9,6 +9,10 @@
 # include <stdlib.h>
 # include <memory>
 # include <stdexcept>
+# include "../utils/utils.hpp"
+#include "../utils/pair.hpp"
+
+
 
 template<class T>
 class Node
