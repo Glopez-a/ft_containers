@@ -147,6 +147,14 @@ namespace ft
 					first++;
 				}
 			}
+
+			size_type count(const key_type &k) const 
+			{
+					Node<ft::pair<Key, T> > *node = _tree->find(k);
+					if (node == NULL)
+							return 0;
+					return 1;
+			}
 	
 	};
 }

@@ -190,6 +190,19 @@ namespace ft
 			size_type		_size;
 			size_type		_capacity;
 
+		protected:
+
+			size_type __recomend( size_type __new_size ) const 
+			{
+				const size_type __ms = this->max_size();
+				if ( __new_size > __ms )
+					throw ( std::length_error( "Vector::reserve length error " ) );
+				const size_type __cap = this->capacity();
+				if ( __cap >= __ms / 2 )
+					return __ms;
+				return ft::max( (2 * __cap), __new_size );
+			}
+
 		public:
 
 			// Constructors
@@ -427,8 +440,6 @@ namespace ft
 
 			void	reserve (size_type n)
 			{
-				if (n > _alloc.max_size())
-					throw std::length_error("n exceed max size!");
 				if (n > _capacity)
 				{
 					T *	new_vec = _alloc.allocate(n);
@@ -465,7 +476,7 @@ namespace ft
 			void	push_back (const value_type & val)
 			{
 				if (_size + 1 > _capacity)
-					this->reserve(_size + ((_size + 3) / 3) + 1);
+					this->reserve(__recomend(_size + 1));
 				_alloc.construct(_vec + _size, val);
 				_size++;
 			}

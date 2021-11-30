@@ -52,6 +52,26 @@
 		"__functional_03": "cpp",
 		"__hash_table": "cpp",
 		"__split_buffer": "cpp",
-		"__tree": "cpp"
+		"__tree": "cpp",
+		"iomanip": "cpp",
+		"locale": "cpp",
+		"__bit_reference": "cpp",
+		"__config": "cpp",
+		"__debug": "cpp",
+		"__errc": "cpp",
+		"__functional_base": "cpp",
+		"__locale": "cpp",
+		"__mutex_base": "cpp",
+		"__nullptr": "cpp",
+		"__string": "cpp",
+		"__threading_support": "cpp",
+		"__tuple": "cpp",
+		"bitset": "cpp",
+		"chrono": "cpp",
+		"complex": "cpp",
+		"ctime": "cpp",
+		"ios": "cpp",
+		"mutex": "cpp",
+		"ratio": "cpp"
 	}
 }

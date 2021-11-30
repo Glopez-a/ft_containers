@@ -10,7 +10,7 @@ void	print_vec(std::vector<T> vec)
 		std::cout << *it << " ";
 	std::cout << std::endl;
 	std::cout << "Size: " << vec.size() << std::endl;
-	//std::cout << "Capacity: " << vec.capacity() << std::endl << std::endl;
+	std::cout << "Capacity: " << vec.capacity() << std::endl << std::endl;
 }
 
 template <>
@@ -21,7 +21,7 @@ void	print_vec(std::vector<std::string> vec)
 		std::cout << *it << " ";
 	std::cout << std::endl;
 	std::cout << "Size: " << vec.size() << std::endl;
-	//std::cout << "Capacity: " << vec.capacity() << std::endl << std::endl;
+	std::cout << "Capacity: " << vec.capacity() << std::endl << std::endl;
 }
 
 template <>
@@ -32,7 +32,7 @@ void	print_vec(std::vector<double> vec)
 		std::cout << *it << " ";
 	std::cout << std::endl;
 	std::cout << "Size: " << vec.size() << std::endl;
-	//std::cout << "Capacity: " << vec.capacity() << std::endl << std::endl;
+	std::cout << "Capacity: " << vec.capacity() << std::endl << std::endl;
 }
 
 int	main()

@@ -7,24 +7,24 @@ namespace ft
 	class pair
 	{
 		public:
-				T _first;
-				Y _second;
+				T first;
+				Y second;
 
 				pair() {
-					_first = T();
-					_second = Y();
+					first = T();
+					second = Y();
 				}
 
-				pair(const T & a, const Y & b) : _first(a), _second(b) {}
+				pair(const T & a, const Y & b) : first(a), second(b) {}
 
-				pair(const pair & src) : _first(src.first), _second(src.second) {}
+				pair(const pair & src) : first(src.first), second(src.second) {}
 
 				virtual	~pair() {}
 
 				pair &	operator=(const pair & other)
                 {
-					_first = other.first;
-					_second = other.second;
+					first = other.first;
+					second = other.second;
 					return *this;
 				}
 		private:

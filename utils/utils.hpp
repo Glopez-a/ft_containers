@@ -11,6 +11,24 @@ namespace ft
 		b = tmp;
 	}
 
+	template <typename T>
+	T max(T a, T b)
+	{
+		if (a <= b)
+			return b;
+		else
+			return a;
+	}
+
+	template <typename T>
+	T min(T a, T b)
+	{
+		if (a >= b)
+			return b;
+		else 
+			return a;
+	}
+
 	template<bool Cond, class T = void> struct enable_if {};
     template<class T> struct enable_if<true, T> { typedef T type; };
 
