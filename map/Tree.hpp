@@ -2,6 +2,7 @@
 #define TREE_HPP
 
 #include "Node.hpp"
+#include "Map_iterator.hpp"
 # include "../utils/utils.hpp"
 
 
@@ -13,33 +14,40 @@ class Tree
 
         Node_allocator_type             _alloc;
         Node<ft::pair<Key, Value> >     *_root;
-        Node<ft::pair<Key, Value> >     *_rend;
         Node<ft::pair<Key, Value> >     *_end;
         int                             _size;
 
         Tree()
         {
             _alloc = Node_allocator_type();
-            _root = NULL;
-            _size = 0;
-            _rend = _alloc.allocate(1);
-            _alloc.construct(_rend);
-            _root = _rend;
+            _root = _alloc.allocate(1);
+            _alloc.construct(_root);
             _end = _alloc.allocate(1);
-            _alloc.construct(_rend);
-            _rend->_right = _end;
-            _end->_parent = _rend;
+            _alloc.construct(_end);
+            _root->_right = _end;
+            _end->_parent = _root;
 
+        }
+
+        void    make_end()
+        {
+            Node<ft::pair<Key, Value> >     *tmp;
+            tmp = _root;
+            while (tmp->_right && tmp->_right != _end)
+                tmp = tmp->_right;
+            tmp->_right = _end;
+            _end->_parent = tmp;
         }
 
         void destroy(Node<ft::pair<Key, Value> > *node)
         {
             if (node->left)
                 destroy(node->left);
-            else if (node->right)
+            else if (node->right && node->_right != _end)
                 destroy(node->right);
             _alloc.destroy(node);
             _alloc.deallocate(node, 1);
+            make_end();
         }
 
         Node<ft::pair<Key, Value> >  *add(Key k, Value val)
@@ -48,6 +56,7 @@ class Tree
             Node<ft::pair<Key, Value> > *node = _alloc.allocate(1);
             _alloc.construct(node, pair);
             add(_root, node);
+            _size++;
             return node;
         }
         
@@ -58,12 +67,13 @@ class Tree
             
             _alloc.construct(newnode, pair);
             add(node, newnode);
+            _size++;
             return newnode;
         }
 
         void    add(Node<ft::pair<Key, Value> > *parent, Node<ft::pair<Key, Value> > *node)
         {
-            if (parent == _rend || (Compare()(parent->_data.first, node->_data.first)))
+            if (parent == _root || (Compare()(parent->_data.first, node->_data.first)))
             {
                 if (parent->_right == NULL)
                 {
@@ -92,53 +102,35 @@ class Tree
             }
         }
 
+
         Node<ft::pair<Key, Value> > *find(Key k)
         {
-            return (findIt(_root, k));
+            Node<ft::pair<Key, Value> > *tmp = _root;
+            while (tmp)
+            {
+                if (tmp->_data.first < k)
+                    tmp = tmp->_left;
+                else if (tmp->_data.first > k)
+                    tmp = tmp->_right;
+                else
+                    return tmp;
+            }
+            return NULL;
         }
 
-        Node<ft::pair<Key, Value> > *findIt(Node<ft::pair<Key, Value> > *node, Key k)
-        {
-            if (node == NULL)
-                return NULL;
-            if (node != _end && node != _rend && node->_data.first == k)
-                return node;
-            if (node == _end || Compare()(k, node->_data.first))
-            {
-                if (node->_left)
-                    return (findIt(node->_left, k));
-                return NULL;
-            }
-            else
-            {
-                if (node->_right)
-                    return (findIt(node->_right, k));
-                return NULL;
-            }
-        }
 
-        bool    is_null(Node<ft::pair<Key, Value> > *node) { return (node == NULL || node == _end || node == _rend); }
+        bool    is_null(Node<ft::pair<Key, Value> > *node) { return (node == NULL || node == _end || node == _root); }
 
         Node<ft::pair<Key, Value> > *get_begin()
         {
-            if (_size == 0)
-                return _end;
-            if (_rend->_right)
-                return _rend->_right;
-            return _rend->_parent;
-        }
-
-        Node<ft::pair<Key, Value> > *get_rbegin()
-        {
-            if (_size == 0)
-                return _rend;
-            if (_end->left)
-                return _end->left;
-            return _end->_parent;
+            Node<ft::pair<Key, Value> > *tmp;
+            tmp = _root->_right;
+            while (tmp->_left)
+                tmp = tmp->_left;
+            return tmp;
         }
 
         Node<ft::pair<Key, Value> > *get_end() { return _end; }
-        Node<ft::pair<Key, Value> > *get_rend() { return _rend; } 
         
         Node<ft::pair<Key, Value> > *remove(Node<ft::pair<Key, Value> > *node)
         {
@@ -181,6 +173,7 @@ class Tree
                 antecesor = node->_left;
                 while (antecesor->_right)
                     antecesor = antecesor->_right;
+                antecesor->_parent->_right = NULL;
                 node->_data = antecesor->_data;
                 _alloc.destroy(antecesor);
                 _alloc.destroy(antecesor, 1);

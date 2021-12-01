@@ -29,8 +29,6 @@ class Node
 
         Node(T data): _parent(NULL), _left(NULL), _right(NULL), _data(data) {}
         Node(): _parent(NULL), _left(NULL), _right(NULL) {}
-
-
 };
 
 
