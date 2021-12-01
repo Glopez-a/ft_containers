@@ -41,13 +41,12 @@ class Tree
 
         void destroy(Node<ft::pair<Key, Value> > *node)
         {
-            if (node->left)
-                destroy(node->left);
-            else if (node->right && node->_right != _end)
-                destroy(node->right);
+            if (node->_left)
+                destroy(node->_left);
+            else if (node->_right && node->_right != _end)
+                destroy(node->_right);
             _alloc.destroy(node);
             _alloc.deallocate(node, 1);
-            make_end();
         }
 
         Node<ft::pair<Key, Value> >  *add(Key k, Value val)
@@ -105,7 +104,7 @@ class Tree
 
         Node<ft::pair<Key, Value> > *find(Key k)
         {
-            Node<ft::pair<Key, Value> > *tmp = _root;
+            Node<ft::pair<Key, Value> > *tmp = _root->_right;
             while (tmp)
             {
                 if (tmp->_data.first < k)
@@ -132,40 +131,43 @@ class Tree
 
         Node<ft::pair<Key, Value> > *get_end() { return _end; }
         
-        Node<ft::pair<Key, Value> > *remove(Node<ft::pair<Key, Value> > *node)
+        void    remove(Node<ft::pair<Key, Value> > *node)
         {
             Node<ft::pair<Key, Value> >   *parent = node->_parent;
             if (node->_right == NULL && node->_left == NULL)
             {
                 if (parent->_right == node)
-                    parent->_right == NULL;
+                    parent->_right = NULL;
                 if (parent->_left == node)
-                    parent->_left == NULL;
+                    parent->_left = NULL;
                 _alloc.destroy(node);
                 _alloc.deallocate(node, 1);
                 _size--;
+                return;
             }
             else if (node->_right == NULL)
             {
                 if (parent->_right == node)
-                    parent->_right == node->_left;
+                    parent->_right = node->_left;
                 if (parent->_left == node)
-                    parent->_left == node->_left;
+                    parent->_left = node->_left;
                 node->_left->_parent = parent;
                 _alloc.destroy(node);
                 _alloc.deallocate(node, 1);
                 _size--;
+                return;
             }
             else if (node->_left == NULL)
             {
                 if (parent->_right == node)
-                    parent->_right == node->_right;
+                    parent->_right = node->_right;
                 if (parent->_left == node)
-                    parent->_left == node->_right;
+                    parent->_left = node->_right;
                 node->_right->_parent = parent;
                 _alloc.destroy(node);
                 _alloc.deallocate(node, 1);
                 _size--;
+                return;
             }
             else if (node->_left && node->_right)
             {
@@ -176,8 +178,9 @@ class Tree
                 antecesor->_parent->_right = NULL;
                 node->_data = antecesor->_data;
                 _alloc.destroy(antecesor);
-                _alloc.destroy(antecesor, 1);
+                _alloc.deallocate(antecesor, 1);
                 _size--;
+                return;
             }
         }
 

@@ -41,6 +41,14 @@ class MapIterator
 			return (*this);
 		}
 
+		template <class Y>
+		MapIterator operator++(Y)
+		{
+			MapIterator ret(*this);
+			operator++();
+			return ret;
+		}
+
 		MapIterator &operator--()
 		{
 			if (_node)
@@ -59,6 +67,14 @@ class MapIterator
 				}
 			}
 			return (*this);
+		}
+
+		template <class Y>
+		MapIterator operator--(Y)
+		{
+			MapIterator ret(*this);
+			operator--();
+			return ret;
 		}
 
 		MapIterator operator+(size_t n)

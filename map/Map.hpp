@@ -40,6 +40,9 @@ namespace ft
 			typedef typename Alloc::template rebind<Tree<Key, T, Compare, Alloc> >::other Tree_alloc_type;
 			Tree<Key, T, Compare, Alloc>		*_tree;
 			Tree_alloc_type						_alloc;
+
+            Node<ft::pair<Key, T> > *get_node(iterator it) { return (_tree->find((*it).first)); }
+
 	
 		public:
 			explicit		map(const key_compare &comp = key_compare())
@@ -103,10 +106,10 @@ namespace ft
 			iterator              end() { return iterator(_tree->get_end()); }
 			const_iterator        end() const { return const_iterator(_tree->get_end()); }
 
-			reverse_iterator              rbegin() { return reverse_iterator(_tree->get_rbegin()); }
-			const_reverse_iterator        rbegin() const { return const_reverse_iterator(_tree->get_rbegin()); }
-			reverse_iterator              rend() { return reverse_iterator(_tree->get_rend()); }
-			const_reverse_iterator        rend() const { return const_reverse_iterator(_tree->get_rend()); }
+			reverse_iterator              rbegin() { return reverse_iterator(_tree->get_end()); }
+			const_reverse_iterator        rbegin() const { return const_reverse_iterator(_tree->get_end()); }
+			reverse_iterator              rend() { return reverse_iterator(_tree->get_begin()); }
+			const_reverse_iterator        rend() const { return const_reverse_iterator(_tree->get_begin()); }
 	
 			bool	empty() const {return !_tree->_size; }
 			size_type	size() const { return _tree->_size; }
@@ -115,7 +118,7 @@ namespace ft
 			mapped_type	&operator[](const key_type &key)
 			{
 				if (!count(key))
-					_tree->add(key, T());
+					return ((_tree->add(key, T()))->_data.second);
 				Node<ft::pair<Key, T> > *node = _tree->find(key);
 				return (node->_data.second);
 			}
@@ -150,12 +153,21 @@ namespace ft
 
 			size_type count(const key_type &k) const 
 			{
+				Node<ft::pair<Key, T> > *node = _tree->find(k);
+				if (node == NULL)
+					return 0;
+				return 1;
+			}
 
-				std::cout << "adios\n";
-					Node<ft::pair<Key, T> > *node = _tree->find(k);
-					if (node == NULL)
-							return 0;
-					return 1;
+			void    clear()
+			{
+				map::iterator it = begin();
+				while (it != end() + 1)
+				{
+						Node<ft::pair<Key, T> > *node = get_node(it);
+						_tree->remove(node);
+						it++;
+				}
 			}
 	
 	};
