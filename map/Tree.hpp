@@ -49,6 +49,18 @@ class Tree
             _alloc.deallocate(node, 1);
         }
 
+        void    clean()
+        {
+            destroy(_root);
+            _root = _alloc.allocate(1);
+            _alloc.construct(_root);
+            _end = _alloc.allocate(1);
+            _alloc.construct(_end);
+            _root->_right = _end;
+            _end->_parent = _root;
+            _size = 0;
+        }
+
         Node<ft::pair<Key, Value> >  *add(Key k, Value val)
         {
             ft::pair<Key, Value> pair = ft::make_pair(k, val);
@@ -143,7 +155,6 @@ class Tree
                 _alloc.destroy(node);
                 _alloc.deallocate(node, 1);
                 _size--;
-                make_end();
                 return;
             }
             else if (node->_right == NULL)
@@ -156,7 +167,6 @@ class Tree
                 _alloc.destroy(node);
                 _alloc.deallocate(node, 1);
                 _size--;
-                make_end();
                 return;
             }
             else if (node->_left == NULL)
@@ -169,7 +179,6 @@ class Tree
                 _alloc.destroy(node);
                 _alloc.deallocate(node, 1);
                 _size--;
-                make_end();
                 return;
             }
             else if (node->_left && node->_right)
@@ -183,7 +192,6 @@ class Tree
                 _alloc.destroy(antecesor);
                 _alloc.deallocate(antecesor, 1);
                 _size--;
-                make_end();
                 return;
             }
         }

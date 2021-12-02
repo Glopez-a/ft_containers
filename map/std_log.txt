@@ -1,0 +1,24 @@
+encontrado!
+
+*** This is your map***
+3 => hola
+7 => adios
+101 => escafoides
+size is => 3
+
+hola
+adios
+pedrito
+
+*** This is your map***
+2 => pedro
+5 => jamon
+52 => juan
+71 => adios1
+101 => escafoides
+size is => 5
+
+lower bound of 5: 5 => jamon
+lower bound of 3: 5 => jamon
+higher bound of 5: 52 => juan
+higher bound of 3: 5 => jamon

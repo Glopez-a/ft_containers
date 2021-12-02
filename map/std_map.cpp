@@ -7,33 +7,48 @@ void    print_map(std::map<K, Val> map)
 {
     typename std::map<K, Val>::iterator   it = map.begin();
     typename std::map<K, Val>::iterator   ite = map.end();
+
+    std::cout << "\n*** This is your map***\n";
     while (it != ite)
     {
         std::cout << (*it).first << " => " << (*it).second << std::endl;
         it++;
     }
-
+    std::cout << "size is => " << map.size() << std::endl;
+    std::cout << "\n";
 }
 
 int main()
 {
     std::map<int, std::string>	my_map;
 	my_map[3] = "hola";
+    my_map[101] = "escafoides";
+    my_map[7] = "adios";
     if (my_map.count(3))
         std::cout << "encontrado!\n";
+    print_map(my_map);
     std::map<int, std::string>::iterator    it = my_map.begin();
     std::cout << (*it).second << std::endl;
     ++it;
     std::cout << (*it).second << std::endl;
     my_map.clear();
-    my_map[4] = "adios";
-    my_map[1] = "pedro";
+    std::cout << "pedrito\n";
+    my_map[101] = "escafoides";
+    my_map[71] = "adios1";
+    my_map[2] = "pedro";
     my_map[5] = "jamon";
     my_map[52] = "juan";
 
     print_map(my_map);
 
-    std::map<int, std::string>::iterator itlow;
+    std::map<int, std::string>::iterator itlow, ithigh;
+    itlow = my_map.lower_bound(5);
+    std::cout << "lower bound of 5: " << (*itlow).first << " => " << (*itlow).second << std::endl;
     itlow = my_map.lower_bound(3);
-    std::cout << (*itlow).first << " => " << (*itlow).second << std::endl;
+    std::cout << "lower bound of 3: " << (*itlow).first << " => " << (*itlow).second << std::endl;
+
+    ithigh = my_map.upper_bound(5);
+    std::cout << "higher bound of 5: " << (*ithigh).first << " => " << (*ithigh).second << std::endl;
+    ithigh = my_map.upper_bound(3);
+    std::cout << "higher bound of 3: " << (*ithigh).first << " => " << (*ithigh).second << std::endl;
 }
