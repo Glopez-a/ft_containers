@@ -162,13 +162,50 @@ namespace ft
 			void    clear()
 			{
 				map::iterator it = begin();
-				while (it != end() + 1)
+				while (it != end())
 				{
 						Node<ft::pair<Key, T> > *node = get_node(it);
 						_tree->remove(node);
 						it++;
 				}
 			}
+
+			iterator	lower_bound(const key_type & k)
+			{
+				iterator it = begin();
+				iterator ite = end();
+				while (it != ite) {
+					if (!key_compare()((*it).first, k))
+						return (it);
+					++it;
+				}
+				return (ite);
+			}
+			
+			const_iterator	lower_bound(const key_type & k) const
+			{
+				
+			}
+			// ft::pair<const_iterator, const_iterator>	equal_range(const key_type & k) const
+			// {
+
+			// }
+
+			// ft::pair<iterator, iterator>				equal_range(const key_type & k)
+			// {
+			// 	iterator it = begin();
+			// 	iterator ite = end();
+			// 	while (it != ite && (*it)->_data.first < k)
+			// 	{
+			// 		if ((*it)->_data.first == k)
+			// 		{
+			// 			ft::pair<iterator, iterator>	ret = ft::make_pair<iterator, iterator>(it, ++it);
+			// 			return ret;
+			// 		}
+			// 	}
+			// 	ft::pair<iterator, iterator>	ret = ft::make_pair<iterator, iterator>(it, ++it);
+			// 	return ret;
+			// }
 	
 	};
 }

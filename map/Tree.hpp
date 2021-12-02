@@ -143,6 +143,7 @@ class Tree
                 _alloc.destroy(node);
                 _alloc.deallocate(node, 1);
                 _size--;
+                make_end();
                 return;
             }
             else if (node->_right == NULL)
@@ -155,6 +156,7 @@ class Tree
                 _alloc.destroy(node);
                 _alloc.deallocate(node, 1);
                 _size--;
+                make_end();
                 return;
             }
             else if (node->_left == NULL)
@@ -167,6 +169,7 @@ class Tree
                 _alloc.destroy(node);
                 _alloc.deallocate(node, 1);
                 _size--;
+                make_end();
                 return;
             }
             else if (node->_left && node->_right)
@@ -180,6 +183,7 @@ class Tree
                 _alloc.destroy(antecesor);
                 _alloc.deallocate(antecesor, 1);
                 _size--;
+                make_end();
                 return;
             }
         }
