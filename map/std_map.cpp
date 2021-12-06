@@ -20,12 +20,19 @@ void    print_map(std::map<K, Val> map)
 
 int main()
 {
+    time_t std_start;
+    time_t std_end;
+    double std_t;
+    
+    std_start = clock();
     std::map<int, std::string>	my_map;
 	my_map[3] = "hola";
     my_map[101] = "escafoides";
     my_map[7] = "adios";
     if (my_map.count(3))
         std::cout << "encontrado!\n";
+    if (!my_map.count(53))
+        std::cout << "no encontrado!\n";
     print_map(my_map);
     std::map<int, std::string>::iterator    it = my_map.begin();
     std::cout << (*it).second << std::endl;
@@ -42,6 +49,22 @@ int main()
  
 
     print_map(my_map);
+
+    // **REVERSE ITERATOR**
+    std::map<int, std::string>::reverse_iterator it2 = my_map.rbegin();
+    std::cout << "\nreverse iterator: " << (*it2).first << std::endl;
+    it2++;
+    std::cout << "reverse iterator: " << (*it2).first << std::endl;
+    std::cout << "\n";
+    std::map<int, std::string>::reverse_iterator it3 = my_map.rend();
+    it3--;
+    std::cout << "reverse iterator: " << (*it3).first << std::endl;
+    it3--;
+    std::cout << "reverse iterator: " << (*it3).first << std::endl;
+    it3--;
+    std::cout << "reverse iterator: " << (*it3).first << std::endl;
+    std::cout << "\n";
+
 
     // **BOUNDS**
 
@@ -66,8 +89,6 @@ int main()
     // **FIND**
 
     it = my_map.find(52);
-    std::cout << "The element finded is " << (*it).first << std::endl;
-    it = my_map.find(54);
     std::cout << "The element finded is " << (*it).first << std::endl;
     
     // **SWAP METHOD**
@@ -106,4 +127,7 @@ int main()
 
     std::cout << "bar1 contains:\n";
     print_map(bar1);
+    std_end = clock();
+    std_t = difftime(std_end, std_start);
+    std::cout << "Time: " << std_t << std::endl;
 }

@@ -1,4 +1,5 @@
 encontrado!
+no encontrado!
 
 *** This is your map***
 3 => hola
@@ -18,6 +19,14 @@ pedrito
 101 => escafoides
 size is => 5
 
+
+reverse iterator: 101
+reverse iterator: 71
+
+reverse iterator: 2
+reverse iterator: 5
+reverse iterator: 52
+
 lower bound of 5: 5 => jamon
 lower bound of 3: 5 => jamon
 higher bound of 5: 52 => juan
@@ -25,3 +34,34 @@ higher bound of 3: 5 => jamon
 lower bound points to: 71 => adios1
 upper bound points to: 101 => escafoides
 The element finded is 52
+foo contains:
+
+*** This is your map***
+a => 11
+b => 22
+c => 33
+size is => 3
+
+bar contains:
+
+*** This is your map***
+x => 100
+y => 200
+size is => 2
+
+foo1 contains:
+
+*** This is your map***
+x => 100
+y => 200
+size is => 2
+
+bar1 contains:
+
+*** This is your map***
+a => 11
+b => 22
+c => 33
+size is => 3
+
+Time: 116

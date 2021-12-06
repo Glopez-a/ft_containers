@@ -26,6 +26,7 @@ class Tree
             _alloc.construct(_end);
             _root->_right = _end;
             _end->_parent = _root;
+            _size = 0;
 
         }
 
@@ -143,6 +144,13 @@ class Tree
 
         Node<ft::pair<Key, Value> > *get_end() { return _end; }
         
+        Node<ft::pair<Key, Value> > *get_rbegin()
+        {
+            return (_end->_parent);
+        }
+
+        Node<ft::pair<Key, Value> > *get_rend() { return _root; }
+
         void    remove(Node<ft::pair<Key, Value> > *node)
         {
             Node<ft::pair<Key, Value> >   *parent = node->_parent;

@@ -47,6 +47,7 @@ namespace ft
 		public:
 			explicit		map(const key_compare &comp = key_compare())
 			{
+				(void) comp;
 				_alloc = Tree_alloc_type();
 				_tree = _alloc.allocate(1);
 				_alloc.construct(_tree);
@@ -55,6 +56,7 @@ namespace ft
 			template <typename InputIterator>
 			map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type())
 			{
+				(void) comp;
 				_alloc = alloc;
 				_tree = _alloc.allocate(1);
 				_alloc.construct(_tree);
@@ -106,10 +108,10 @@ namespace ft
 			iterator              end() { return iterator(_tree->get_end()); }
 			const_iterator        end() const { return const_iterator(_tree->get_end()); }
 
-			reverse_iterator              rbegin() { return reverse_iterator(_tree->get_end()); }
-			const_reverse_iterator        rbegin() const { return const_reverse_iterator(_tree->get_end()); }
-			reverse_iterator              rend() { return reverse_iterator(_tree->get_begin()); }
-			const_reverse_iterator        rend() const { return const_reverse_iterator(_tree->get_begin()); }
+			reverse_iterator              rbegin() { return reverse_iterator(_tree->get_rbegin()); }
+			const_reverse_iterator        rbegin() const { return const_reverse_iterator(_tree->get_rbegin()); }
+			reverse_iterator              rend() { return reverse_iterator(_tree->get_rend()); }
+			const_reverse_iterator        rend() const { return const_reverse_iterator(_tree->get_rend()); }
 	
 			bool	empty() const {return !_tree->_size; }
 			size_type	size() const { return _tree->_size; }

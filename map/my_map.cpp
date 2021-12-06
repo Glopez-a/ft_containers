@@ -21,6 +21,11 @@ void    print_map(ft::map<K, Val> &map)
 int main()
 {
     // CONSTRUCTOR, OPERATOR [], COUNT, SIZE
+    time_t ft_start;
+    time_t ft_end;
+    double ft_t;
+    
+    ft_start = clock();
     ft::map<int, std::string>	my_map;
 	my_map[3] = "hola";
     my_map[101] = "escafoides";
@@ -45,6 +50,21 @@ int main()
 
     print_map(my_map);
 
+    // **ITERATOR REVERSE**
+
+    ft::map<int, std::string>::reverse_iterator it2 = my_map.rbegin();
+    std::cout << "\nreverse iterator: " << (*it2).first << std::endl;
+    it2++;
+    std::cout << "reverse iterator: " << (*it2).first << std::endl;
+    std::cout << "\n";
+    ft::map<int, std::string>::reverse_iterator it3 = my_map.rend();
+    it3--;
+    std::cout << "reverse iterator: " << (*it3).first << std::endl;
+    it3--;
+    std::cout << "reverse iterator: " << (*it3).first << std::endl;
+    it3--;
+    std::cout << "reverse iterator: " << (*it3).first << std::endl;
+    std::cout << "\n";
     // **BOUNDS**
 
     ft::map<int, std::string>::iterator itlow, ithigh;
@@ -70,8 +90,7 @@ int main()
 
     it = my_map.find(52);
     std::cout << "The element finded is " << (*it).first << std::endl;
-    it = my_map.find(54);
-    std::cout << "The element finded is " << (*it).first << std::endl;
+
 
     // **SWAP METHOD**
 
@@ -109,4 +128,7 @@ int main()
 
     std::cout << "bar1 contains:\n";
     print_map(bar1);
+    ft_end = clock();
+    ft_t = difftime(ft_end, ft_start);
+    std::cout << "Time: " << ft_t << std::endl;
 }

@@ -147,6 +147,14 @@ class MapReverseIterator
 			return (*this);
 		}
 
+		template <class Y>
+		MapReverseIterator operator++(Y)
+		{
+			MapReverseIterator ret(*this);
+			operator++();
+			return ret;
+		}
+
 		MapReverseIterator	&operator--()
 		{
 			if (_node)
@@ -166,6 +174,15 @@ class MapReverseIterator
 			}
 			return (*this);
 		}
+
+		template <class Y>
+		MapReverseIterator operator--(Y)
+		{
+			MapReverseIterator ret(*this);
+			operator--();
+			return ret;
+		}
+
         MapReverseIterator operator+(size_t n)
         {
             MapReverseIterator ret(*this);
