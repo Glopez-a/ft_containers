@@ -39,7 +39,11 @@ int main()
     my_map[5] = "jamon";
     my_map[52] = "juan";
 
+ 
+
     print_map(my_map);
+
+    // **BOUNDS**
 
     std::map<int, std::string>::iterator itlow, ithigh;
     itlow = my_map.lower_bound(5);
@@ -51,4 +55,55 @@ int main()
     std::cout << "higher bound of 5: " << (*ithigh).first << " => " << (*ithigh).second << std::endl;
     ithigh = my_map.upper_bound(3);
     std::cout << "higher bound of 3: " << (*ithigh).first << " => " << (*ithigh).second << std::endl;
+
+    std::pair<std::map<int, std::string>::iterator, std::map<int, std::string>::iterator> ret;
+    ret = my_map.equal_range(71);
+    std::cout << "lower bound points to: ";
+    std::cout << (*ret.first).first << " => " << (*ret.first).second << '\n';
+    std::cout << "upper bound points to: ";
+    std::cout << (*ret.second).first << " => " << (*ret.second).second << '\n';
+
+    // **FIND**
+
+    it = my_map.find(52);
+    std::cout << "The element finded is " << (*it).first << std::endl;
+    it = my_map.find(54);
+    std::cout << "The element finded is " << (*it).first << std::endl;
+    
+    // **SWAP METHOD**
+
+    std::map<char,int> foo,bar;
+
+    foo['x']=100;
+    foo['y']=200;
+
+    bar['a']=11;
+    bar['b']=22;
+    bar['c']=33;
+
+    foo.swap(bar);
+
+    std::cout << "foo contains:\n";
+    print_map(foo);
+
+    std::cout << "bar contains:\n";
+    print_map(bar);
+
+    // **SWAP NON-MEMBER**
+
+    std::map<char,int> foo1,bar1;
+
+    foo1['x']=100;
+    foo1['y']=200;
+
+    bar1['a']=11;
+    bar1['b']=22;
+    bar1['c']=33;
+
+    swap(foo,bar);
+    std::cout << "foo1 contains:\n";
+    print_map(foo1);
+
+    std::cout << "bar1 contains:\n";
+    print_map(bar1);
 }

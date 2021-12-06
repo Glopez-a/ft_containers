@@ -22,3 +22,6 @@ lower bound of 5: 5 => jamon
 lower bound of 3: 5 => jamon
 higher bound of 5: 52 => juan
 higher bound of 3: 5 => jamon
+lower bound points to: 71 => adios1
+upper bound points to: 101 => escafoides
+The element finded is 52

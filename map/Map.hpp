@@ -115,6 +115,8 @@ namespace ft
 			size_type	size() const { return _tree->_size; }
 			size_type	max_size() const { return allocator_type().max_size(); }
 
+			key_compare	key_comp() const { return (Compare()); }
+
 			mapped_type	&operator[](const key_type &key)
 			{
 				if (!count(key))
@@ -215,28 +217,66 @@ namespace ft
 				}
 				return (ite);
 			}
-			// ft::pair<const_iterator, const_iterator>	equal_range(const key_type & k) const
-			// {
 
-			// }
+			pair<const_iterator, const_iterator>	equal_range(const key_type & k) const
+			{
+				pair<const_iterator, const_iterator> pair(lower_bound(k), upper_bound(k));
+				return (pair);
+			}
 
-			// ft::pair<iterator, iterator>				equal_range(const key_type & k)
-			// {
-			// 	iterator it = begin();
-			// 	iterator ite = end();
-			// 	while (it != ite && (*it)->_data.first < k)
-			// 	{
-			// 		if ((*it)->_data.first == k)
-			// 		{
-			// 			ft::pair<iterator, iterator>	ret = ft::make_pair<iterator, iterator>(it, ++it);
-			// 			return ret;
-			// 		}
-			// 	}
-			// 	ft::pair<iterator, iterator>	ret = ft::make_pair<iterator, iterator>(it, ++it);
-			// 	return ret;
-			// }
+			pair<iterator, iterator>				equal_range(const key_type & k)
+			{
+				pair<iterator, iterator> pair(lower_bound(k), upper_bound(k));
+				return (pair);
+			}
 	
+			iterator	find(const key_type & k)
+			{
+				Node<ft::pair<Key, T> >	*node = _tree->find(k);
+				if (node == NULL)
+					return (this->end());
+				return iterator(node);
+			}
+
+			const_iterator	find(const key_type & k) const
+			{
+				Node<ft::pair<Key, T> >	*node = _tree->find(k);
+				if (node == NULL)
+					return this->end();
+				return const_iterator(node);
+			}
+
+			class value_compare
+			{
+				friend class map;
+				protected:
+					Compare comp;
+					value_compare (Compare c) : comp(c) {}
+					typedef bool result_type;
+					typedef value_type first_argument_type;
+					typedef value_type second_argument_type;
+					bool operator() (const value_type& x, const value_type& y) const
+					{
+						return comp(x.first, y.first);
+					}
+			};
+
+			value_compare value_comp() const{
+				return (value_compare(Compare()));
+			}
+
+			void	swap(map & x)
+			{
+				Tree<Key, T, Compare, Alloc>	*tmp = _tree;
+				_tree = x._tree;
+				x._tree = tmp;
+			}
 	};
+
+	template <typename Key,typename T, class Alloc>
+	void swap(ft::map<Key,T, Alloc> & x, ft::map<Key,T, Alloc> & y) {
+		x.swap(y);
+	}
 }
 
 #endif

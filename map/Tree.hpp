@@ -119,9 +119,9 @@ class Tree
             Node<ft::pair<Key, Value> > *tmp = _root->_right;
             while (tmp)
             {
-                if (tmp->_data.first < k)
+                if (tmp->_data.first > k)
                     tmp = tmp->_left;
-                else if (tmp->_data.first > k)
+                else if (tmp->_data.first < k)
                     tmp = tmp->_right;
                 else
                     return tmp;
