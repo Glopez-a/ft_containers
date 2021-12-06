@@ -1,0 +1,10 @@
+stack1 is empty
+stack is not empty
+vector size: 2
+stack size: 2
+stack1 size: 1
+stack size: 3
+stack size: 2
+stack top is 200
+stack top is 22
+Time: 81
