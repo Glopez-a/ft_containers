@@ -1,2 +1,2 @@
 # ft_containers
-recreating c++ containers, STL
+recreating c++ template containers, STL
